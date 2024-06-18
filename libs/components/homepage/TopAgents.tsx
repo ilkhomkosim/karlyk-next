@@ -26,16 +26,16 @@ const TopAgents = (props: TopAgentsProps) => {
 
 	const {
 		loading: getAgentsLoading,
-		data: getAgentsData,
+		data: getAgenstData,
 		error: getAgentsError,
 		refetch: getAgentsRefetch,
 	} = useQuery(GET_AGENTS, {
-		fetchPolicy: "cache-and-network",
-		variables: {input: initialInput},
+		fetchPolicy: 'cache-and-network', // cach + =>network
+		variables: { input: initialInput },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setTopAgents(data?.getAgents?.list);
-		}
+		},
 	});
 	/** HANDLERS **/
 

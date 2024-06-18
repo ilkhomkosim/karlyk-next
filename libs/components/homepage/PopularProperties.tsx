@@ -23,19 +23,18 @@ const PopularProperties = (props: PopularPropertiesProps) => {
 	const [popularProperties, setPopularProperties] = useState<Property[]>([]);
 
 	/** APOLLO REQUESTS **/
-
 	const {
 		loading: getPropertiesLoading,
 		data: getPropertiesData,
 		error: getPropertiesError,
 		refetch: getPropertiesRefetch,
 	} = useQuery(GET_PROPERTIES, {
-		fetchPolicy: "cache-and-network",
-		variables: {input: initialInput},
+		fetchPolicy: 'cache-and-network', // cach + =>network
+		variables: { input: initialInput },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setPopularProperties(data?.getPropertie?.list);
-		}
+			setPopularProperties(data?.getProperties?.list);
+		},
 	});
 	/** HANDLERS **/
 
