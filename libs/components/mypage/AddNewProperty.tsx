@@ -167,7 +167,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 				}
 			})
 		} catch (err: any) {
-			sweetErrorHandling(err).then();
+			sweetErrorHandling(err).then();  
 		}
 	}, [insertPropertyData]);
 
