@@ -28,7 +28,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 	const {
 		loading: getAgentPropertiesLoading,
 		data: getAgentPropertiesData,
-		error: bgetAgentPropertiesError,
+		error: getAgentPropertiesError,
 		refetch: getAgentPropertiesRefetch,
 	} = useQuery(GET_AGENT_PROPERTIES, {
 		fetchPolicy: "network-only",
