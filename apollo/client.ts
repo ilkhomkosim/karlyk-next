@@ -7,6 +7,7 @@ import { onError } from '@apollo/client/link/error';
 import { getJwtToken } from '../libs/auth';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { sweetErrorAlert } from '../libs/sweetAlert';
+import { error } from 'console';
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 function getHeaders() {
@@ -27,6 +28,35 @@ const tokenRefreshLink = new TokenRefreshLink({
 		return null;
 	},
 });
+
+// custom websocket client 
+class LoggingSocket {
+	private socket: WebSocket;
+
+	constructor(url: string) {
+		this.socket = new WebSocket(url);
+
+		this.socket.onopen = () => {
+			console.log('WebSocket connection!');
+		}
+
+		this.socket.onmessage = (msg) => {
+			console.log("WenSocket message:", msg.data)
+		}
+
+		this.socket.onerror = (msg) => {
+			console.log("WenSocket error:", error);
+		}
+	}
+ 
+	send(data: string | ArrayBuffer | SharedArrayBuffer | Blob | ArrayBufferView) {
+		this.socket.send(data);
+	}
+
+	close() {
+		this.socket.close()
+	}
+}
 
 function createIsomorphicLink() {
 	if (typeof window !== 'undefined') {
@@ -56,6 +86,7 @@ function createIsomorphicLink() {
 					return { headers: getHeaders() };
 				},
 			},
+			webSocketImpl: LoggingSocket
 		});
 
 		const errorLink = onError(({ graphQLErrors, networkError, response }) => {
