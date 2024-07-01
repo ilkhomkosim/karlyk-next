@@ -7,6 +7,12 @@ import MarkChatUnreadIcon from '@mui/icons-material/MarkChatUnread';
 import { useRouter } from 'next/router';
 import ScrollableFeed from 'react-scrollable-feed';
 import { RippleBadge } from '../../scss/MaterialTheme/styled';
+import { useReactiveVar } from '@apollo/client';
+import { socketVar, userVar } from '../../apollo/store';
+import { Member } from '../types/member/member';
+import { Messages, REACT_APP_API_URL } from '../config';
+import { sweetErrorAlert } from '../sweetAlert';
+import { text } from 'stream/consumers';
 
 const NewMessage = (type: any) => {
 	if (type === 'right') {
@@ -32,17 +38,57 @@ const NewMessage = (type: any) => {
 	}
 };
 
+interface MessagePayload{
+	event: string;
+	text: string;
+	memberData: Member;
+}
+
+interface InfoPayload{
+	event: string;
+	totalClients: number;
+	memberData: Member;
+	action: string;
+}
+
 const Chat = () => {
 	const chatContentRef = useRef<HTMLDivElement>(null);
-	const [messagesList, setMessagesList] = useState([]);
+	const [messagesList, setMessagesList] = useState<MessagePayload[]>([]);
 	const [onlineUsers, setOnlineUsers] = useState<number>(0);
 	const textInput = useRef(null);
-	const [message, setMessage] = useState<string>('');
+	const [messageInput, setMessageInput] = useState<string>('');
 	const [open, setOpen] = useState(false);
 	const [openButton, setOpenButton] = useState(false);
 	const router = useRouter();
+	const user = useReactiveVar(userVar);
+	const socket = useReactiveVar(socketVar);
 
 	/** LIFECYCLES **/
+
+	useEffect(() => {
+		socket.onmessage = (msg) => {
+			const data = JSON.parse(msg.data);
+			console.log('Websocket message', data);
+			
+			switch(data.event) {
+				case 'info':
+					const newInfo: InfoPayload = data;
+					setOnlineUsers(newInfo.totalClients);
+					break;
+				case 'getMessages': 
+					const list: MessagePayload[] = data.list;
+					setMessagesList(list);
+					break;
+				case 'message':
+					const newMessage: MessagePayload = data;
+					messagesList.push(newMessage);
+					setMessagesList([...messagesList])
+					break;
+
+			}
+		}
+	}, [socket, messagesList]);
+
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			setOpenButton(true);
@@ -62,9 +108,9 @@ const Chat = () => {
 	const getInputMessageHandler = useCallback(
 		(e: any) => {
 			const text = e.target.value;
-			setMessage(text);
+			setMessageInput(text);
 		},
-		[message],
+		[messageInput],
 	);
 
 	const getKeyHandler = (e: any) => {
@@ -77,7 +123,13 @@ const Chat = () => {
 		}
 	};
 
-	const onClickHandler = () => {};
+	const onClickHandler = () => {
+		if(!messageInput) sweetErrorAlert(Messages.error4);
+		else {
+			socket.send(JSON.stringify({event: 'message', data: messageInput}));
+			setMessageInput('');
+		}
+	};
 
 	return (
 		<Stack className="chatting">
@@ -97,8 +149,14 @@ const Chat = () => {
 							<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
 								<div className={'welcome'}>Welcome to Live chat!</div>
 							</Box>
-							{messagesList}
-							<>
+							{/* {messagesList.map((ele: MessagePayload) => {
+								const {text, memberData} = ele;
+								const memberImage = memberData?.memberImage 
+								? `${REACT_APP_API_URL}/${memberData.memberImage}`
+								: '/img/profile/defaultUser.svg';
+							})} */}
+
+							
 								<Box
 									component={'div'}
 									flexDirection={'row'}
@@ -107,9 +165,10 @@ const Chat = () => {
 									justifyContent={'flex-end'}
 									sx={{ m: '10px 0px' }}
 								>
-									<div className={'msg-right'}>hi</div>
+									<div className={'msg-right'}>Hi</div>
 								</Box>
-								<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
+							<>
+							<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
 									<Avatar alt={'jonik'} src={'/img/profile/defaultUser.svg'} />
 									<div className={'msg-left'}>Hi</div>
 								</Box>
@@ -124,6 +183,7 @@ const Chat = () => {
 						name={'message'}
 						className={'msg-input'}
 						placeholder={'Type message'}
+						value={messageInput}
 						onChange={getInputMessageHandler}
 						onKeyDown={getKeyHandler}
 					/>
