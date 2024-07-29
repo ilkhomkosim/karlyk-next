@@ -8,7 +8,7 @@ import { MemberUpdate } from '../../types/member/member.update';
 import { useMutation, useReactiveVar } from '@apollo/client';
 import { getJwtToken, updateStorage, updateUserInfo } from '../../auth';
 import { UPDATE_MEMBER } from '../../../apollo/user/mutation';
-import { sweetErrorHandling, sweetMixinErrorAlert } from '../../sweetAlert';
+import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
 import { Messages, REACT_APP_API_URL } from '../../config';
 
 const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
@@ -91,7 +91,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 			const jwtToken = result.data.updateMember?.accessToken;
 			await updateStorage({ jwtToken});
 			updateUserInfo(result.data.updateMember?.accessToken);
-			await sweetMixinErrorAlert('Information updated seccessfully.');
+			await sweetMixinSuccessAlert('Information updated seccessfully.');
 		} catch(err: any) {
 			sweetErrorHandling(err).then();
 		}

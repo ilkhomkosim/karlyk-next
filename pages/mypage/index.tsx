@@ -92,7 +92,7 @@ const MyPage: NextPage = () => {
 				await refetch({input: query});
 			} catch(err: any) {
 				console.log('ERROR, likeMemberHandler:', err.message);
-				sweetErrorHandling(err.message).then();
+				sweetMixinErrorAlert(err.message).then();
 			}
 	}
 

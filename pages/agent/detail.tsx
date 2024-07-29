@@ -119,13 +119,13 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 
 	useEffect(() => {
 		if(searchFilter.search.memberId) {
-			getPropertiesRefetch({variables: {input: searchFilter}}).then();
+			getPropertiesRefetch({variables: {input: searchFilter} }).then();
 		}
 		}, [searchFilter]);
 
 	useEffect(() => {
 		if(commentInquiry.search.commentRefId) {
-			getCommentsRefetch({variables: {input: commentInquiry}}).then();
+			getCommentsRefetch({variables: {input: commentInquiry} }).then();
 		}
 	}, [commentInquiry]);
 
@@ -152,7 +152,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 	const createCommentHandler = async () => {
 		try {
 			if(!user._id) throw new Error(Messages.error2);
-			if(user._id === agentId) throw new Error("Cannot write a review for yourself");
+			if(user._id === agentId) throw new Error("You can not write a review for yourself");
 			await createComment({
 				variables: {
 					input: insertCommentData

@@ -29,7 +29,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 		variables: {input: searchFilter},
 		skip: !searchFilter?.search?.memberId,
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
+		onCompleted: (data: any) => {
 			setAgentProperties(data?.getProperties?.list);
 			setTotal(data?.getProperties?.metaCounter[0]?.total ?? 0)
 		},

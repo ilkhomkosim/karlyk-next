@@ -32,6 +32,7 @@ import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { CREATE_COMMENT, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import { NonNullTypeNode } from 'graphql';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -111,7 +112,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 	} = useQuery(GET_COMMENTS, {
 		fetchPolicy: "cache-and-network",
 		variables: { input: initialComment },
-		skip: !commentInquiry?.search.commentRefId,
+		skip: !commentInquiry.search.commentRefId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			if(data?.getComments?.list) setPropertyComments(data?.getComments?.list);
@@ -138,9 +139,8 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 
 	useEffect(() => {
 		if(commentInquiry.search.commentRefId) {
-
+			getCommentsRefetch({input: commentInquiry})
 		}
-		getCommentsRefetch({input: commentInquiry})
 	}, [commentInquiry]);
 
 	/** HANDLERS **/

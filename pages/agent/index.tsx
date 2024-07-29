@@ -9,12 +9,12 @@ import AgentCard from '../../libs/components/common/AgentCard';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Member } from '../../libs/types/member/member';
+import { LIKE_TARGET_MEMBER } from '../../apollo/user/mutation';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_AGENTS } from '../../apollo/user/query';
-import { LIKE_TARGET_MEMBER } from '../../apollo/user/mutation';
+import { T } from '../../libs/types/common';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 import { Messages } from '../../libs/config';
-import { T } from '../../libs/types/common';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -46,13 +46,13 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		error: getAgentsError,
 		refetch: getAgentsRefetch,
 	} = useQuery(GET_AGENTS, {
-		fetchPolicy: "network-only",
-		variables: {input: searchFilter},
+		fetchPolicy: 'network-only',
+		variables: { input: searchFilter },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setAgents(data?.getAgents?.list);
 			setTotal(data?.getAgents?.metaCounter[0]?.total);
-		}
+		},
 	});
 
 	/** LIFECYCLES **/
@@ -109,9 +109,9 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	};
 
 	const likeMemberHandler = async (user: any, id: string) => {
-		try{
-			if(!id) return;
-			if(!user._id) throw new Error(Messages.error2);
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetMember({
 				variables: {
@@ -119,13 +119,13 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 				},
 			});
 
-			await getAgentsRefetch({input: searchFilter});
+			await getAgentsRefetch({ input: searchFilter });
 			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
-			console.log('ERROR, likePropertyHandler:', err.message);
+			console.log('ERROR,likeMemberHandler:', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
-	}
+	};
 
 	if (device === 'mobile') {
 		return <h1>AGENTS PAGE MOBILE</h1>;

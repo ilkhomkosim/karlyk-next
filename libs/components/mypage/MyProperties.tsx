@@ -51,7 +51,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 
 	const deletePropertyHandler = async (id: string) => {
 		try{
-			if(await sweetConfirmAlert(' are you sure to delete this property?')) {
+			if(await sweetConfirmAlert(' Are you sure to delete this product?')) {
 				await updateProperty({
 					variables: {
 						input: {
@@ -76,8 +76,8 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 						input: {
 							_id: id,
 							propertyStatus: status,
-						}
-					}
+						},
+					},
 				});
 				await getAgentPropertiesRefetch({ input: searchFilter})
 			}

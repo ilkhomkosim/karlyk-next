@@ -83,7 +83,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 			input: articleId
 		},
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
+		onCompleted: (data: any) => {
 			setBoardArticle(data?.getBoardArticle);
 			if(data?.getBoardArticle?.memberData?.memberImage) {
 				setMemberImage(`${process.env.REACT_APP_API_URL}/${data?.getBoardArticle?.memberData?.memberImage}`);
@@ -102,7 +102,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 			input: searchFilter
 		},
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
+		onCompleted: (data: any) => {
 			setComments(data.getComments.list);
 			setTotal(data?.getComments?.metaCounter?.[0].total || 0);
 		},
@@ -151,7 +151,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		if(!comment) return;
 		try {
 			if(!user._id) throw new Error(Messages.error2);
-			const commentInput: CommentInput ={
+			const commentInput: CommentInput = {
 				commentGroup: CommentGroup.ARTICLE,
 				commentRefId: articleId,
 				commentContent: comment,
@@ -164,7 +164,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 			await getCommentsRefetch({input: searchFilter});
 			await boardArticleRefetch({input: articleId});
 			setComment('')
-			await sweetMixinErrorAlert('Successfully commented!');
+			await sweetMixinSuccessAlert('Successfully commented!');
 		} catch (err: any) {
 			sweetMixinErrorAlert(err.message);
 		} 
@@ -178,7 +178,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 
 			const updateData: CommentUpdate ={
 				_id: commentId,
-				...(commentStatus && {commentStatus: commentStatus});
+				...(commentStatus && {commentStatus: commentStatus}),
 				...(updatedComment && {commentContent: updatedComment})
 			};
 			
@@ -202,7 +202,6 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 				})
 				await sweetMixinErrorAlert('Successfully updated')
 			}
-			await getCommentsRefetch({input: searchFilter});
 			await getCommentsRefetch({input: searchFilter});
 		} catch (err: any) {
 			sweetMixinErrorAlert(err.message);
@@ -330,7 +329,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 										</Stack>
 										<Stack className="info">
 											<Stack className="icon-info">
-												{boardArticle?.meLiked && boardArticle?.meLiked[0].myFavorite ? (
+												{boardArticle?.meLiked && boardArticle?.meLiked[0] ? (
 												<ThumbUpAltIcon onClick={() => likeBoardArticleHandler(user, boardArticle?._id)}  />
 												) : (
 													<ThumbUpOffAltIcon onClick={() => likeBoardArticleHandler(user, boardArticle?._id)} />
@@ -345,12 +344,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 											</Stack>
 											<Stack className="divider"></Stack>
 											<Stack className="icon-info">
-												{total >  0 ? (
-													<ChatIcon />
-												) : (
-													<ChatBubbleOutlineRoundedIcon />
-												)}
-
+												{total >  0 ? <ChatIcon />  : <ChatBubbleOutlineRoundedIcon /> }
 												<Typography className="text">{total}</Typography>
 											</Stack>
 										</Stack>
@@ -361,7 +355,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 									<Stack className="like-and-dislike">
 										<Stack className="top">
 											<Button>
-											{boardArticle?.meLiked && boardArticle?.meLiked[0].myFavorite ? (
+											{boardArticle?.meLiked && boardArticle?.meLiked[0] ? (
 												<ThumbUpAltIcon onClick={() => likeBoardArticleHandler(user, boardArticle?._id)}  />
 												) : (
 													<ThumbUpOffAltIcon onClick={() => likeBoardArticleHandler(user, boardArticle?._id)} />
@@ -388,7 +382,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 										/>
 										<Stack className="button-box">
 											<Typography>{wordsCnt}/100</Typography>
-											<Button >comment</Button>
+											<Button  onClick={createCommentHandler}>comment</Button>
 										</Stack>
 									</Stack>
 								</Stack>
@@ -427,7 +421,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 																<DeleteForeverIcon sx={{ color: '#757575', cursor: 'pointer' }} />
 															</IconButton>
 															<IconButton
-																onClick={(e) => {
+																onClick={(e:any) => {
 																	setUpdatedComment(commentData?.commentContent);
 																	setUpdatedCommentWordsCnt(commentData?.commentContent?.length);
 																	setUpdatedCommentId(commentData?._id);

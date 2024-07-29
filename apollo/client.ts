@@ -7,7 +7,8 @@ import { onError } from '@apollo/client/link/error';
 import { getJwtToken } from '../libs/auth';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { sweetErrorAlert } from '../libs/sweetAlert';
-import { error } from 'console';
+import { ThumbUpSharp } from '@mui/icons-material';
+import { isArrayBufferView } from 'util/types';
 import { socketVar } from './store';
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -30,8 +31,8 @@ const tokenRefreshLink = new TokenRefreshLink({
 	},
 });
 
-// custom websocket client 
-class LoggingSocket {
+// Custom WebSoket client
+class LoggingWebSocket {
 	private socket: WebSocket;
 
 	constructor(url: string) {
@@ -40,23 +41,22 @@ class LoggingSocket {
 
 		this.socket.onopen = () => {
 			console.log('WebSocket connection!');
-		}
+		};
 
 		this.socket.onmessage = (msg) => {
-			console.log("WenSocket message:", msg.data)
-		}
+			console.log('WebSocket message:', msg.data);
+		};
 
-		this.socket.onerror = (msg) => {
-			console.log("WenSocket error:", error);
-		}
+		this.socket.onerror = (error) => {
+			console.log('WebSocket, error:', error);
+		};
 	}
- 
 	send(data: string | ArrayBuffer | SharedArrayBuffer | Blob | ArrayBufferView) {
 		this.socket.send(data);
 	}
 
 	close() {
-		this.socket.close()
+		this.socket.close();
 	}
 }
 
@@ -88,16 +88,15 @@ function createIsomorphicLink() {
 					return { headers: getHeaders() };
 				},
 			},
-			webSocketImpl: LoggingSocket
+			webSocketImpl: LoggingWebSocket,
 		});
 
 		const errorLink = onError(({ graphQLErrors, networkError, response }) => {
 			if (graphQLErrors) {
 				graphQLErrors.map(({ message, locations, path, extensions }) => {
 					console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
-					if(!message.includes('input')) sweetErrorAlert(message);
-				}
-				);
+					if (!message.includes('input')) sweetErrorAlert(message);
+				});
 			}
 			if (networkError) console.log(`[Network error]: ${networkError}`);
 			// @ts-ignore

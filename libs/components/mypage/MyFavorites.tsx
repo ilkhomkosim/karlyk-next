@@ -52,12 +52,12 @@ const MyFavorites: NextPage = () => {
 					input: id,
 				}
 			});
-			await getFavoritesRefetch({input: searchFavorites})
+			await getFavoritesRefetch({input: searchFavorites});
 		} catch (err: any) {
 			console.log('ERROR, likePropertyHandler:', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
-	}
+	};
 
 	if (device === 'mobile') {
 		return <div>NESTAR MY FAVORITES MOBILE</div>;

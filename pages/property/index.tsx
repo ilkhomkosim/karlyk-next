@@ -14,7 +14,7 @@ import { Direction, Message } from '../../libs/enums/common.enum';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_PROPERTIES } from '../../apollo/user/query';
 import { T } from '../../libs/types/common';
-import { LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
+import { CREATE_COMMENT, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 
 export const getStaticProps = async ({ locale }: any) => ({
@@ -38,7 +38,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 
 	/** APOLLO REQUESTS **/
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
-
+	
 	const {
 		loading: getPropertiesLoading,
 		data: getPropertiesData,
@@ -66,7 +66,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 
 	useEffect(() => {
 		console.log("searchFilter:", searchFilter);
-		// getPropertiesRefetch({input: searchFilter}).then();
+		getPropertiesRefetch({input: searchFilter}).then();
 	}, [searchFilter]);
 
 	/** HANDLERS **/
