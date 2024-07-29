@@ -24,7 +24,7 @@ const eventsData: EventData[] = [
 	},
 	{
 		eventTitle: 'Suseong Lake Event',
-		city: 'Daegu',
+		city: 'Sokcho',
 		description: 'The Suseong Lake Festival is a culture and arts festival held alongside Suseongmot Lake!',
 		imageSrc: '/img/events/DAEGU.webp',
 	},
@@ -33,7 +33,7 @@ const eventsData: EventData[] = [
 		city: 'Busan',
 		description:
 			'Haeundae Sand Festival, the nation’s largest eco-friendly exhibition on sand, is held at Haeundae Beach!',
-		imageSrc: '/img/events/BUSAN.webp',
+		imageSrc: '/img/events/Busan,%20Chungchangte-ro%20244.webp',
 	},
 ];
 

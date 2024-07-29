@@ -11,7 +11,7 @@ export enum PropertyStatus {
 }
 
 export enum PropertyLocation {
-	SEOUL = 'SEOUL',
+    SEOUL = 'SEOUL',
 	BUSAN = 'BUSAN',
 	INCHEON = 'INCHEON',
 	DAEGU = 'DAEGU',

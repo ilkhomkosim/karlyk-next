@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, Button,CircularProgress, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import { NextPage } from 'next';
@@ -32,7 +32,7 @@ import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { CREATE_COMMENT, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
-import { NonNullTypeNode } from 'graphql';
+
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -62,21 +62,20 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 	/** APOLLO REQUESTS **/
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
 	const [createComment] = useMutation(CREATE_COMMENT);
-
 	const {
 		loading: getPropertyLoading,
 		data: getPropertyData,
 		error: getPropertyError,
 		refetch: getPropertyRefetch,
 	} = useQuery(GET_PROPERTY, {
-		fetchPolicy: "network-only",
-		variables: {input: propertyId},
-		skip: !propertyId,
+		fetchPolicy: 'network-only',
+		variables: { input: propertyId },
+		skip: !propertyId, // propertyId mavjud bolmasa mantiq amalga oshmasin
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			if(data?.getProperty) setProperty(data?.getProperty);
-			if(data?.getProperty) setSlideImage(data?.getProperty?.propertyImages[0]);
-		}
+			if (data?.getProperty) setProperty(data?.getProperty);
+			if (data?.getProperty) setSlideImage(data?.getProperty?.propertyImages[0]);
+		},
 	});
 
 	const {
@@ -85,23 +84,23 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		error: getPropertiesError,
 		refetch: getPropertiesRefetch,
 	} = useQuery(GET_PROPERTIES, {
-		fetchPolicy: "cache-and-network",
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			input: {
-				page:1,
-				limit:4,
+				page: 1,
+				limit: 4,
 				sort: 'createdAt',
 				direction: Direction.DESC,
 				search: {
 					locationList: property?.propertyLocation ? [property?.propertyLocation] : [],
-				}
-		}
-	},
+				},
+			},
+		},
 		skip: !propertyId && !property,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			if(data?.getProperties?.list) setDestinationProperties(data?.getProperties?.list);
-		}
+			if (data?.getProperties?.list) setDestinationProperties(data?.getProperties?.list);
+		},
 	});
 
 	const {
@@ -110,14 +109,16 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		error: getCommentsError,
 		refetch: getCommentsRefetch,
 	} = useQuery(GET_COMMENTS, {
-		fetchPolicy: "cache-and-network",
-		variables: { input: initialComment },
+		fetchPolicy: 'cache-and-network',
+		variables: {
+			input: initialComment,
+		},
 		skip: !commentInquiry.search.commentRefId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			if(data?.getComments?.list) setPropertyComments(data?.getComments?.list);
-			setCommentTotal(data?.getComments?.memberData[0]?.total ?? 0);
-		}
+			if (data?.getComments?.list) setPropertyComments(data?.getComments?.list);
+			setCommentTotal(data?.getComments?.metaCounter[0]?.total ?? 0);
+		},
 	});
 
 	/** LIFECYCLES **/
@@ -138,71 +139,70 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 	}, [router]);
 
 	useEffect(() => {
-		if(commentInquiry.search.commentRefId) {
-			getCommentsRefetch({input: commentInquiry})
+		if (commentInquiry?.search.commentRefId) {
+			getCommentsRefetch({ input: commentInquiry });
 		}
 	}, [commentInquiry]);
 
 	/** HANDLERS **/
-
 	const changeImageHandler = (image: string) => {
 		setSlideImage(image);
 	};
 
+	const createCommentHandler = async () => {
+		try {
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+			await createComment({ variables: { input: insertCommentData } });
+
+			setInsertCommentData({ ...insertCommentData, commentContent: '' });
+
+			await getCommentsRefetch({ input: commentInquiry });
+		} catch (err) {
+			await sweetErrorHandling(err);
+		}
+	};
+
+	if (getPropertyLoading) {
+		return (
+			<Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '1080px' }}>
+				<CircularProgress size={'4rem'} />
+			</Stack>
+		);
+	}
+
 	const likePropertyHandler = async (user: T, id: string) => {
-		try{
-			if(!id) return;
-			if(!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+			//execute likeTargetProperty Mutation
+			await likeTargetProperty({ variables: { input: id } });
 
-			await likeTargetProperty({
-				variables: {input: id}
+			await getPropertyRefetch({ input: id });
+
+			// execute getPropertiesRefetch
+			await getPropertiesRefetch({
+				input: {
+					page: 1,
+					limit: 4,
+					sort: 'createdAt',
+					direction: Direction.DESC,
+					search: {
+						locationList: [property?.propertyLocation],
+					},
+				},
 			});
-			await getPropertyRefetch({input: id})
-			await getPropertiesRefetch({input: {
-				page:1,
-				limit:4,
-				sort: 'createdAt',
-				direction: Direction.DESC,
-				search: {
-					locationList: [property?.propertyLocation],
-				}
-			}})
 
-			await sweetTopSmallSuccessAlert("success", 800)
-		} catch(err: any) {
-			console.log("ERROR, likePropertyHandler:", err.message);
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('Error, on likeTargetProperty', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
-	}
+	};
 
 	const commentPaginationChangeHandler = async (event: ChangeEvent<unknown>, value: number) => {
 		commentInquiry.page = value;
 		setCommentInquiry({ ...commentInquiry });
 	};
-
-	const createCommentHandler = async () => {
-		try{
-			if(!user._id) throw new Error(Message.NOT_AUTHENTICATED);
-			await createComment({variables: {input: insertCommentData}})
-
-			setInsertCommentData({
-				...insertCommentData,
-				commentContent: '',
-			});
-
-			await getCommentsRefetch({input: commentInquiry});
-		} catch(err: any) {
-			await sweetErrorHandling(err)
-		}
-	}
-
-	if(getPropertyLoading) {
-		return ( <Stack
-		sx={{display:'flex', justifyContent: 'center', alignItems:'center', width:'100%', height:'1080px'}}
-		>
-			<CircularProgress size={'4rem'} />
-		</Stack>)
-	}
 
 	if (device === 'mobile') {
 		return <div>PROPERTY DETAIL PAGE</div>;
@@ -638,7 +638,11 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										{destinationProperties.map((property: Property) => {
 											return (
 												<SwiperSlide className={'similar-homes-slide'} key={property.propertyTitle}>
-													<PropertyBigCard property={property} likePropertyHandler = {likePropertyHandler} key={property?._id} />
+													<PropertyBigCard
+														property={property}
+														likePropertyHandler={likePropertyHandler}
+														key={property?._id}
+													/>
 												</SwiperSlide>
 											);
 										})}
