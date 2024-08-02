@@ -1,6 +1,6 @@
 import React from 'react';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { Stack } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 
 const Advertisement = () => {
 	const device = useDeviceDetect();
@@ -16,13 +16,14 @@ const Advertisement = () => {
 					preload="auto"
 					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
 				>
-					<source src="/video/ads.mov" type="video/mp4" />
+					<source src="/video/video.mp4" type="video/mp4" />
 				</video>
 			</Stack>
 		);
 	} else {
 		return (
-			<Stack className={'video-frame'}>
+			<Container className={'video-main'}>
+							<Stack className={'video-frame'}>
 				<video
 					autoPlay
 					muted
@@ -31,9 +32,34 @@ const Advertisement = () => {
 					preload="auto"
 					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
 				>
-					<source src="/video/ads.mov" type="video/mp4" />
+					<source src="/video/video.mp4" type="video/mp4" />
 				</video>
 			</Stack>
+							<Stack className={'video-frame2'}>
+				<video
+					autoPlay
+					muted
+					loop
+					playsInline
+					preload="auto"
+					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+				>
+					<source src="/video/video2.mp4" type="video/mp4" />
+				</video>
+			</Stack>
+							<Stack className={'video-frame3'}>
+				<video
+					autoPlay
+					muted
+					loop
+					playsInline
+					preload="auto"
+					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+				>
+					<source src="/video/video3.mp4" type="video/mp4" />
+				</video>
+			</Stack>
+			</Container>
 		);
 	}
 };

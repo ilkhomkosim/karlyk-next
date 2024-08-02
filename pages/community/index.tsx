@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Stack, Tab, Typography, Button, Pagination } from '@mui/material';
+import { Stack, Tab, Typography, Button, Pagination, Box } from '@mui/material';
 import CommunityCard from '../../libs/components/common/CommunityCard';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -112,19 +112,16 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 				<div className="container">
 					<TabContext value={searchCommunity.search.articleCategory}>
 						<Stack className="main-box">
-							<Stack className="left-config">
-								<Stack className={'image-info'}>
-									<img src={'/img/logo/logoText.svg'} />
-									<Stack className={'community-name'}>
-										<Typography className={'name'}>Karlyk Community</Typography>
-									</Stack>
-								</Stack>
+						<Stack className="left-config">
+							<Stack className={'community-name'}>
+								{/* <Box className={'name'}>Karlyk community</Box> */}
+							</Stack>
 
 								<TabList
-									orientation="vertical"
+									orientation="horizontal"
 									aria-label="lab API tabs example"
 									TabIndicatorProps={{
-										style: { display: 'none' },
+									style: { display: 'none' },
 									}}
 									onChange={tabChangeHandler}
 								>

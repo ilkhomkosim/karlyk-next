@@ -6,11 +6,13 @@
 		.info-box {
 			width: 100%;
 			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
+			flex-direction: column;
+			justify-content: right;
 			.left {
 				display: flex;
 				flex-direction: column;
+				justify-content: center;
+				align-items: center;
 				span {
 					color: #181a20;
 					font-family: $font;
@@ -40,6 +42,7 @@
 				display: flex;
 				flex-direction: row;
 				align-items: flex-end;
+				justify-content: flex-end;
 				.pagination-box {
 					display: flex;
 					flex-direction: row;
@@ -47,11 +50,11 @@
 					.swiper-pagination-bullet.swiper-pagination-bullet-active {
 						background: #000000;
 					}
-					.swiper-trend-next {
+					.swiper-new-next {
 						margin-left: 20px;
 						cursor: pointer;
 					}
-					.swiper-trend-prev {
+					.swiper-new-prev {
 						margin-right: 20px;
 						cursor: pointer;
 					}
@@ -114,7 +117,7 @@
 				}
 			}
 		}
-		.trend-properties {
+		.new-properties {
 			padding: 108px 0px 76px;
 			width: 100%;
 			height: 697px;
@@ -134,19 +137,19 @@
 						justify-content: center;
 						align-items: center;
 					}
-					.trend-property-swiper {
+					.new-property-swiper {
 						width: 100%;
 						height: 400px;
 						display: flex;
 						flex-direction: row;
-						.trend-property-slide {
+						.new-property-slide {
 							width: auto;
 							height: auto;
 							display: flex;
 							margin: 10px 0 0 10px;
 						}
 					}
-					.trend-card-box {
+					.new-card-box {
 						position: relative;
 						width: 300px;
 						height: 375px;
@@ -159,8 +162,9 @@
 						}
 						.card-img {
 							position: relative;
-							width: 100%;
-							height: 203px;
+							width: 160px;
+							height: 300px;
+							margin-left: 35px;
 							background-size: cover;
 							border-radius: 12px 12px 0px 0px;
 							cursor: pointer;
@@ -271,6 +275,62 @@
 										line-height: normal;
 										text-overflow: ellipsis;
 									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.choose-us{
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			height: 700px;
+			margin-top: 50px;
+			.container{
+				display: flex;
+				flex-direction: row;
+
+				.choose-img{
+					width: 700px;
+					height: 600px;
+					background-image: url(/img/banner/home/choose-img.png);
+					background-size: cover;
+				}
+				.choose-info{
+					display: flex;
+					flex-direction: column;
+					width: 400px;
+					margin-top: 150px;
+					.left span{
+						font-size: 50px;
+						font-family: $font;
+						font-weight: 550;
+					}
+					.left p{
+						font-size: 20px;
+						margin-top: 40px;
+						width: 450px;
+					}
+					.main-adv{
+						display: flex;
+						flex-direction: row;
+
+						.advice{
+							display: flex;
+							flex-direction: column;
+							margin-top: 50px;
+							.advice-txt{
+								display: flex;
+								flex-direction: row;
+								height: 50px;
+								font-size: 25px;
+								font-family: $font;
+								font-weight: 500;
+								.check{
+									margin-left: 10px;
+									margin-right: 15px;
 								}
 							}
 						}
@@ -480,12 +540,39 @@
 				}
 			}
 		}
-		.video-frame {
-			width: 100%;
-			height: 678px;
-			background: black;
-			transform: perspective(0px);
-			box-shadow: -3px 0px 20px 14px #34343480;
+		.video-main{
+			display: flex;
+			position: relative;
+			flex-direction: column;
+			.video-frame {
+				width: 100%;
+				height: 678px;
+				background: black;
+				margin-right: 500px;
+				margin-top: 50px;
+				transform: perspective(0px);
+				box-shadow: -3px 0px 20px 14px #34343480;
+			}
+			.video-frame2 {
+				width: 400px;
+				height: 300px;
+				// background: black;
+				margin-left: 900px;
+				margin-top: -200px;
+				transform: perspective(0px);
+				box-shadow: -3px 0px 20px 14px #34343480;
+			}
+			.video-frame3 {
+				width: 600px;
+				height: 300px;
+				// background: black;
+				margin-top: -130px;
+				margin-right: -900px;
+				margin-left: 30px;
+				margin-bottom: 50px;
+				transform: perspective(0px);
+				box-shadow: -3px 0px 20px 14px #34343480;
+			}
 		}
 		.top-properties {
 			padding: 108px 0px 76px;
@@ -525,18 +612,19 @@
 						}
 						.card-img {
 							position: relative;
-							width: 100%;
-							height: 203px;
+							width: 160px;
+							height: 300px;
+							margin-left: 35px;
 							background-size: cover;
 							border-radius: 12px 12px 0px 0px;
 							cursor: pointer;
 							div {
 								position: absolute;
 								padding: 8px 12px;
-								left: 12px;
+								left: 200px;
 								bottom: 12px;
 								border-radius: 6px;
-								background: #fff;
+								background: #f54646;
 								color: #181a20;
 								font-family: $font;
 								font-size: 15px;
@@ -544,6 +632,9 @@
 								font-weight: 600;
 								line-height: normal;
 							}
+						}
+						.devider{
+							background-color: #0c0505;
 						}
 						.info {
 							padding: 20px 22px 17px;
@@ -553,7 +644,7 @@
 							border-radius: 0px 0px 12px 12px;
 							border: 1px solid rgba(196, 196, 196, 0.71);
 							border-top: none;
-							background: #fff;
+							background: #edeae7;
 							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 							.title {
 								overflow: hidden;
@@ -698,14 +789,16 @@
 							}
 						}
 						.top-agent-card {
-							width: 205px;
+							width: 206px;
 							height: 280px;
 							display: flex;
 							flex-direction: column;
+							background-color: #f4eada;
+							border-radius: 25px;
 							img {
-								width: 209px;
-								height: 209px;
-								border-radius: 50%;
+								width: 205px;
+								height: 205px;
+								border-radius: 30px 30px 0px 30px;
 								cursor: pointer;
 								object-fit: cover;
 							}
@@ -845,19 +938,22 @@
 					}
 					.content-top {
 						margin-bottom: 26px;
-						width: 100%;
+						width: 600px;
 						height: 30px;
 						display: flex;
 						flex-direction: row;
-						justify-content: flex-end;
+						justify-content: center;
 						align-items: center;
+						background-color: #e86a39;
+						border-radius: 12px;
+						cursor: pointer;
 						span {
 							font-family: $font;
 							font-style: normal;
 							font-weight: 500;
 							font-size: 16px;
 							line-height: 36px;
-							color: #616161;
+							color: #ffffff;
 							cursor: pointer;
 						}
 						img {
@@ -928,15 +1024,16 @@
 						}
 					}
 					.community-right {
-						width: 590px;
+						width: 642px;
 						height: auto;
 						display: flex;
 						flex-direction: column;
 						.horizontal-card {
-							display: flex;
-							flex-direction: row;
-							cursor: pointer;
-							margin-bottom: 34px;
+							margin-right: 12px;
+								margin-bottom: 18px;
+								width: 202px;
+								display: flex;
+								flex-direction: column;
 							img {
 								width: 180px;
 								height: 111px;

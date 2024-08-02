@@ -29,14 +29,14 @@ const withLayoutBasic = (Component: any) => {
 
 			switch (router.pathname) {
 				case '/property':
-					title = 'Property Search';
-					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/properties.png';
+					title = 'Our store ';
+					desc = 'We are all here choose your product!';
+					bgImage = '/img/banner/products.avif';
 					break;
 				case '/agent':
-					title = 'Agents';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/agents.webp';
+					title = 'Our agents';
+					desc = 'We are creating for you';
+					bgImage = '/img/banner/agents.jpg';
 					break;
 				case '/agent/detail':
 					title = 'Agent Page';
@@ -44,19 +44,19 @@ const withLayoutBasic = (Component: any) => {
 					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/mypage':
-					title = 'my page';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header1.svg';
+					title = 'My page';
+					desc = 'Run freely your page';
+					bgImage = '/img/banner/mypage.jpg';
 					break;
 				case '/community':
-					title = 'Community';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					title = 'Articles';
+					desc = 'Write freely!';
+					bgImage = '/img/banner/community.jpg';
 					break;
 				case '/community/detail':
-					title = 'Community Detail';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					title = 'Article Detail';
+					desc = 'Write freely and get more information!';
+					bgImage = '/img/banner/community.jpg';
 					break;
 				case '/cs':
 					title = 'CS';

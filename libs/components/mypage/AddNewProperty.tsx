@@ -7,11 +7,11 @@ import { REACT_APP_API_URL, propertySquare } from '../../config';
 import { PropertyInput } from '../../types/property/property.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
-import { userVar } from '../../../apollo/store';
+import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { userVar } from '../../../apollo/store';
 import { CREATE_PROPERTY, UPDATE_PROPERTY } from '../../../apollo/user/mutation';
 import { GET_PROPERTY } from '../../../apollo/user/query';
-import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
 
 const AddProperty = ({ initialValues, ...props }: any) => {
 	const device = useDeviceDetect();
@@ -33,8 +33,10 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		error: getPropertyError,
 		refetch: getPropertyRefetch,
 	} = useQuery(GET_PROPERTY, {
-		fetchPolicy: "network-only",
-		variables: {input: router.query.propertyId},
+		fetchPolicy: 'network-only',
+		variables: {
+			input: router.query.propertyId,
+		},
 	});
 
 	/** LIFECYCLES **/
@@ -70,7 +72,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 				JSON.stringify({
 					query: `mutation ImagesUploader($files: [Upload!]!, $target: String!) { 
 						imagesUploader(files: $files, target: $target)
-				}`,
+				  }`,
 					variables: {
 						files: [null, null, null, null, null],
 						target: 'property',
@@ -129,44 +131,44 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 	};
 
 	const insertPropertyHandler = useCallback(async () => {
-		try{
+		try {
 			const result = await createProperty({
 				variables: {
 					input: insertPropertyData,
-				}
+				},
 			});
 
-			await sweetMixinSuccessAlert('This property has been created successfully!');
+			await sweetMixinSuccessAlert('This property has been created successfully.');
 			await router.push({
 				pathname: '/mypage',
 				query: {
 					category: 'myProperties',
-				}
-			})
+				},
+			});
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
 		}
 	}, [insertPropertyData]);
 
 	const updatePropertyHandler = useCallback(async () => {
-		try{
-			// @ts-ignore
+		try {
+			//@ts-ignore
 			insertPropertyData._id = getPropertyData?.getProperty?._id;
 			const result = await updateProperty({
 				variables: {
-					input: insertPropertyData
-				}
+					input: insertPropertyData,
+				},
 			});
-			
-			await sweetMixinSuccessAlert(' This property has been updated successfully.');
+
+			await sweetMixinSuccessAlert('This property has been update successfully.');
 			await router.push({
 				pathname: '/mypage',
 				query: {
-					input: 'myPropereties',
-				}
-			})
+					category: 'myProperties',
+				},
+			});
 		} catch (err: any) {
-			sweetErrorHandling(err).then();  
+			sweetErrorHandling(err).then();
 		}
 	}, [insertPropertyData]);
 
@@ -182,8 +184,8 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		return (
 			<div id="add-property-page">
 				<Stack className="main-title-box">
-					<Typography className="main-title">Add New Property</Typography>
-					<Typography className="sub-title">We are glad to see you again!</Typography>
+					<Typography className="main-title">Add New Products</Typography>
+					<Typography className="sub-title">Create and sell your products!</Typography>
 				</Stack>
 
 				<div>
@@ -282,7 +284,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								</Stack>
 							</Stack>
 
-							<Stack className="config-row">
+							{/* <Stack className="config-row">
 								<Stack className="price-year-after-price">
 									<Typography className="title">Barter</Typography>
 									<select
@@ -321,11 +323,11 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
 								</Stack>
-							</Stack>
+							</Stack> */}
 
 							<Stack className="config-row">
 								<Stack className="price-year-after-price">
-									<Typography className="title">Rooms</Typography>
+									<Typography className="title">Size</Typography>
 									<select
 										className={'select-description'}
 										value={insertPropertyData.propertyRooms || 'select'}
@@ -337,7 +339,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										<option disabled={true} selected={true} value={'select'}>
 											Select
 										</option>
-										{[1, 2, 3, 4, 5].map((room: number) => (
+										{[100, 200, 250, 400, 500].map((room: number) => (
 											<option value={`${room}`}>{room}</option>
 										))}
 									</select>
@@ -345,7 +347,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
 								</Stack>
 								<Stack className="price-year-after-price">
-									<Typography className="title">Bed</Typography>
+									<Typography className="title">Volume</Typography>
 									<select
 										className={'select-description'}
 										value={insertPropertyData.propertyBeds || 'select'}
@@ -365,7 +367,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
 								</Stack>
 								<Stack className="price-year-after-price">
-									<Typography className="title">Square</Typography>
+									<Typography className="title">Product left count</Typography>
 									<select
 										className={'select-description'}
 										value={insertPropertyData.propertySquare || 'select'}
@@ -388,7 +390,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								</Stack>
 							</Stack>
 
-							<Typography className="property-title">Property Description</Typography>
+							<Typography className="property-title">Product Description</Typography>
 							<Stack className="config-column">
 								<Typography className="title">Description</Typography>
 								<textarea
@@ -403,7 +405,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 							</Stack>
 						</Stack>
 
-						<Typography className="upload-title">Upload photos of your property</Typography>
+						<Typography className="upload-title">Upload products photos</Typography>
 						<Stack className="images-box">
 							<Stack className="upload-box">
 								<svg xmlns="http://www.w3.org/2000/svg" width="121" height="120" viewBox="0 0 121 120" fill="none">
@@ -500,7 +502,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								</Button>
 							) : (
 								<Button className="next-button" disabled={doDisabledCheck()} onClick={insertPropertyHandler}>
-									<Typography className="next-button-text">Create</Typography>
+									<Typography className="next-button-text">Save</Typography>
 								</Button>
 							)}
 						</Stack>

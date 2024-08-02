@@ -1,7 +1,9 @@
 export enum PropertyType {
-	APARTMENT = 'APARTMENT',
-	VILLA = 'VILLA',
-	HOUSE = 'HOUSE',
+	SKIN_CARE = 'SKIN_CARE',
+	HAIR_CARE = 'HAIR_CARE',
+	MAKEUP = 'MAKEUP',
+	PERFUME = 'PERFUME',
+	PERSONAL_CARE = 'PERSONAL_CARE'
 }
 
 export enum PropertyStatus {
@@ -11,7 +13,7 @@ export enum PropertyStatus {
 }
 
 export enum PropertyLocation {
-    SEOUL = 'SEOUL',
+	SEOUL = 'SEOUL',
 	BUSAN = 'BUSAN',
 	INCHEON = 'INCHEON',
 	DAEGU = 'DAEGU',

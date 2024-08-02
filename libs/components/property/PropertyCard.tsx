@@ -28,7 +28,7 @@ const PropertyCard = (props: PropertyCardType) => {
 		: '/img/banner/header1.svg';
 
 	if (device === 'mobile') {
-		return <div>PROPERTY CARD</div>;
+		return <div>PRODUCT CARD</div>;
 	} else {
 		return (
 			<Stack className="card-config">
@@ -47,9 +47,6 @@ const PropertyCard = (props: PropertyCardType) => {
 							<Typography>TOP</Typography>
 						</Box>
 					)}
-					<Box component={'div'} className={'price-box'}>
-						<Typography>${formatterStr(property?.propertyPrice)}</Typography>
-					</Box>
 				</Stack>
 				<Stack className="bottom">
 					<Stack className="name-address">
@@ -71,18 +68,21 @@ const PropertyCard = (props: PropertyCardType) => {
 					</Stack>
 					<Stack className="options">
 						<Stack className="option">
-							<img src="/img/icons/bed.svg" alt="" /> <Typography>{property.propertyBeds} bed</Typography>
+							<img src="/img/icons/volume.png" alt="" /> <Typography>{property.propertyBeds} pc/pcs</Typography>
 						</Stack>
 						<Stack className="option">
-							<img src="/img/icons/room.svg" alt="" /> <Typography>{property.propertyRooms} room</Typography>
+							<img src="/img/icons/mlg.png" alt="" /> <Typography>{property.propertyRooms} ml/g </Typography>
 						</Stack>
 						<Stack className="option">
-							<img src="/img/icons/expand.svg" alt="" /> <Typography>{property.propertySquare} m2</Typography>
+							<img src="/img/icons/leftcount.png" alt="" /> <Typography>{property.propertySquare} pcs left</Typography>
 						</Stack>
 					</Stack>
 					<Stack className="divider"></Stack>
 					<Stack className="type-buttons">
-						<Stack className="type">
+					<Box component={'div'} className={'price-box'}>
+						<Typography>${formatterStr(property?.propertyPrice)}</Typography>
+					</Box>
+						{/* <Stack className="type">
 							<Typography
 								sx={{ fontWeight: 500, fontSize: '13px' }}
 								className={property.propertyRent ? '' : 'disabled-type'}
@@ -95,7 +95,7 @@ const PropertyCard = (props: PropertyCardType) => {
 							>
 								Barter
 							</Typography>
-						</Stack>
+						</Stack> */}
 						{!recentlyVisited && (
 							<Stack className="buttons">
 								<IconButton color={'default'}>

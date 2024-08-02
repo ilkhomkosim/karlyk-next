@@ -227,9 +227,10 @@
 									height: 100%;
 								}
 								img {
-									width: 100%;
-									height: 100%;
+									width: 250px;
+									height: 260px;
 									object-fit: cover;
+									margin-left: 12px;
 									border-radius: 12px 12px 0 0;
 								}
 								.top-badge {
@@ -264,7 +265,7 @@
 									align-items: center;
 									border-radius: 6px;
 									border: 1px solid rgba(255, 255, 255, 0.5);
-									background: #fff;
+									background: #fa4848;
 									p {
 										color: #181a20;
 										font-family: $font;
@@ -330,6 +331,15 @@
 											line-height: normal;
 										}
 									}
+								}
+								img {
+									width: 19px;
+									height: 20px;
+								}
+								svg {
+									width: 28px;
+									height: 27px;
+									cursor: pointer;
 								}
 								.divider {
 									width: 100%;
