@@ -328,3 +328,51 @@ export const UNSUBSCRIBE = gql`
 		}
 	}
 `;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+
+export const UPDATE_NOTIFICATION = gql`
+mutation UpdateNotification($input: NotificationUpdate!) {
+    updateNotification(input: $input) {
+        _id
+        notificationType
+        notificationStatus
+        notificationGroup
+        notificationTitle
+        notificationDesc
+        authorId
+        receiverId
+        propertyId
+        articleId
+        memberData {
+            _id
+            memberStatus
+            memberAuthType
+            memberPhone
+            memberNick
+            memberFullName
+            memberImage
+            memberAddress
+            memberDesc
+            memberProperties
+            memberArticles
+            memberFollowers
+            memberFollowings
+            memberPoints
+            memberLikes
+            memberViews
+            memberComments
+            memberRank
+            memberWarnings
+            memberBlocks
+            deletedAt
+            createdAt
+            updatedAt
+            accessToken
+            memberType
+        }
+    }
+}
+`;

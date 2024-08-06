@@ -13,12 +13,18 @@ import { CaretDown } from 'phosphor-react';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import Link from 'next/link';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import { NotificDto } from '../types/notification/notification';
+import { NotificationUpdate } from '../types/notification/notification.update';
+import { NextPage } from 'next';
+import { NotificationStatus } from '../enums/notification.enum';
+import { UPDATE_NOTIFICATION } from '../../apollo/user/mutation';
+import { GET_NOTIFICATIONS } from '../../apollo/user/query';
 
-const Top = () => {
+const Top: NextPage = ({ intialValues, ...props }: any) => {
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const { t, i18n } = useTranslation('common');
@@ -33,7 +39,77 @@ const Top = () => {
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
 
-	/** LIFECYCLES **/
+	// notification part
+	const [notificationAnchorEl, setNotificationAnchorEl] = useState<HTMLElement | null>(null);
+	const [notifications, setNotifications] = useState<NotificDto[]>([]);
+	const notificationOpen = Boolean(notificationAnchorEl);
+	const [updateData, setUpdateData] = useState<NotificationUpdate>(intialValues);
+	const [unreadCount, setUnreadCount] = useState(0);
+
+	//Apollo query
+	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
+
+	const {
+		loading: notificationsLoading,
+		data: notificationsData,
+		error: notificationsError,
+		refetch: refetchNotifications,
+	} = useQuery(GET_NOTIFICATIONS, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 100, search: { receiverId: '' } } },
+		notifyOnNetworkStatusChange: true,
+
+		onCompleted: (data) => {
+			if (data?.getNotifcations?.list) {
+				setNotifications(data?.getNotifcations?.list);
+				const unread = data?.getNotifcations?.list.filter(
+					(notification: any) => notification.notificationStatus === NotificationStatus.WAIT,
+				).length;
+				setUnreadCount(unread);
+			}
+		},
+	});
+
+	useEffect(() => {
+		if (notificationsData) {
+			setNotifications(notificationsData.getNotifications.list);
+			const unread = notificationsData.getNotifications.list.filter(
+				(notification: any) => notification.notificationStatus === NotificationStatus.WAIT,
+			).length;
+			setUnreadCount(unread);
+		}
+	}, [notificationsData]);
+
+	useEffect(() => {
+		if (notificationsData?.getNotifcations?.list) {
+			setNotifications(notificationsData.getNotifcations.list);
+			notificationsData.getNotifications.list.forEach((notification: { _id: any }) => {
+				console.log('Notification_id:', notification._id); // check if id is exist
+			});
+		}
+	}, [notificationsData]);
+
+	let notifics = notificationsData?.getNotifications?.list;
+
+	const [hasNewNotifications, setHasNewNotifications] = useState(false);
+
+	useEffect(() => {
+		if (
+			notifications &&
+			notifications.some((notification) => notification.notificationStatus === NotificationStatus.WAIT)
+		) {
+			setHasNewNotifications(true);
+		} else {
+			setHasNewNotifications(false);
+		}
+	}, [notifications]);
+
+	useEffect(() => {
+		if (!notificationOpen) {
+			refetchNotifications();
+		}
+	}, [notificationOpen, refetchNotifications]);
+
 	useEffect(() => {
 		if (localStorage.getItem('locale') === null) {
 			localStorage.setItem('locale', 'en');
@@ -45,7 +121,7 @@ const Top = () => {
 
 	useEffect(() => {
 		switch (router.pathname) {
-			case '/property/detail':
+			case '/product/detail':
 				setBgColor(true);
 				break;
 			default:
@@ -97,6 +173,44 @@ const Top = () => {
 		}
 	};
 
+	const handleNotificationClick = (event: React.MouseEvent<SVGSVGElement>) => {
+		setNotificationAnchorEl(event.currentTarget as unknown as HTMLElement);
+	};
+
+	const handleMenuItemClick = (notification: NotificDto) => {
+		if (!notification.propertyId && !notification.articleId) {
+			router.push(`/member?memberId=${notification.authorId}`);
+		} else if (notification.articleId) {
+			router.push(`/community/detail?id=${notification.articleId}`);
+		} else if (notification.propertyId) {
+			router.push(`/product/detail?id=${notification.propertyId}`);
+		}
+
+		const updateNotification: NotificationUpdate = {
+			_id: notification._id,
+			notificationStatus: NotificationStatus.READ,
+		};
+		updateNotificationHandler(updateNotification);
+	};
+
+	const handleNotificationClose = () => {
+		setNotificationAnchorEl(null);
+	};
+
+	const updateNotificationHandler = async (updateData: NotificationUpdate) => {
+		try {
+			console.log('+updateData:', updateData);
+			await updateNotification({
+				variables: {
+					input: updateData,
+				},
+			});
+			await refetchNotifications;
+		} catch (err: any) {
+			console.log('Error on updateNotificationHandler', err.message);
+		}
+	};
+
 	const StyledMenu = styled((props: MenuProps) => (
 		<Menu
 			elevation={0}
@@ -135,62 +249,48 @@ const Top = () => {
 		},
 	}));
 
+	// const toggleNotifications = () => {
+	// 	setShowNotifications((prev) => !prev);
+	// };
+
 	if (typeof window !== 'undefined') {
 		window.addEventListener('scroll', changeNavbarColor);
 	}
 
 	if (device == 'mobile') {
-		return (
-			<Stack className={'top'}>
-				<Link href={'/'}>
-					<div>{t('Home')}</div>
-				</Link>
-				<Link href={'/property'}>
-					<div>{t('Store')}</div>
-				</Link>
-				<Link href={'/agent'}>
-					<div> {t('Agents')} </div>
-				</Link>
-				<Link href={'/community?articleCategory=FREE'}>
-					<div> {t('Community')} </div>
-				</Link>
-				<Link href={'/cs'}>
-					<div> {t('CS')} </div>
-				</Link>
-			</Stack>
-		);
+		return <Stack className={'top'}></Stack>;
 	} else {
 		return (
 			<Stack className={'navbar'}>
 				<Stack className={`navbar-main ${colorChange ? 'transparent' : ''} ${bgColor ? 'transparent' : ''}`}>
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
-							<Link href={'/'}>
-								<img src="/img/logo/logo-no-background.svg" alt="" />
-							</Link>
-						</Box>
-						<Box component={'div'} className={'router-box'}>
-							<Link href={'/'}>
-								<div>{t('Home')}</div>
-							</Link>
-							<Link href={'/property'}>
-								<div>{t('Store')}</div>
-							</Link>
-							<Link href={'/agent'}>
-								<div> {t('Agents')} </div>
-							</Link>
-							<Link href={'/community?articleCategory=FREE'}>
-								<div> {t('Articles')} </div>
-							</Link>
-							{user?._id && (
-								<Link href={'/mypage'}>
-									<div> {t('My Page')} </div>
-								</Link>
-							)}
-							<Link href={'/cs'}>
-								<div> {t('CS')} </div>
-							</Link>
-						</Box>
+<Link href={'/'}>
+	<img src="/img/logo/logo-no-background.svg" alt="" />
+</Link>
+</Box>
+<Box component={'div'} className={'router-box'}>
+<Link href={'/'}>
+	<div>{t('Home')}</div>
+</Link>
+<Link href={'/property'}>
+	<div>{t('Store')}</div>
+</Link>
+<Link href={'/agent'}>
+	<div> {t('Agents')} </div>
+</Link>
+<Link href={'/community?articleCategory=FREE'}>
+	<div> {t('Articles')} </div>
+</Link>
+{user?._id && (
+	<Link href={'/mypage'}>
+		<div> {t('My Page')} </div>
+	</Link>
+)}
+<Link href={'/cs'}>
+	<div> {t('CS')} </div>
+</Link>
+</Box>
 						<Box component={'div'} className={'user-box'}>
 							{user?._id ? (
 								<>
@@ -230,12 +330,107 @@ const Top = () => {
 							)}
 
 							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+								{user?._id && (
+									<div style={{ position: 'relative', display: 'inline-block', color: 'white', cursor: 'pointer' }}>
+										<NotificationsOutlinedIcon className={'notification-icon'} onClick={handleNotificationClick} />
+										{hasNewNotifications && (
+											<div
+												style={{
+													position: 'absolute',
+													top: '-10px',
+													right: '-3px',
+													width: '15px',
+													height: '15px',
+													borderRadius: '50%',
+													backgroundColor: '#ef1d26',
+												}}
+											>
+												{' '}
+												{unreadCount > 0 && (
+													<span
+														style={{ fontSize: '12px', fontWeight: '600', display: 'flex', justifyContent: 'center' }}
+													>
+														{unreadCount}
+													</span>
+												)}
+											</div>
+										)}
+										<Menu
+											anchorEl={notificationAnchorEl}
+											open={Boolean(notificationAnchorEl)}
+											onClose={handleNotificationClose}
+											MenuListProps={{
+												'aria-labelledby': 'notification-button',
+											}}
+											PaperProps={{
+												style: {
+													padding: '20px',
+													marginTop: '40px',
+													minHeight: '400px',
+													minWidth: '400px',
+													maxHeight: '400px',
+													width: '400px',
+													whiteSpace: 'normal',
+													wordWrap: 'break-word',
+													borderRadius: '22px',
+													background: 'white',
+													fontSize: '16px',
+												},
+											}}
+										>
+											<strong>Notifications</strong>
+											{!notificationsLoading && (!notifics || notifics.length === 0) && (
+												<MenuItem style={{ margin: '100' }}>No notifications</MenuItem>
+											)}
+
+											{notificationsLoading && <MenuItem>Loading...</MenuItem>}
+											{notifics &&
+												notifics.map((notification: any) => {
+													const isRead = notification.notificationStatus === NotificationStatus.READ;
+													const notSeen = notification.notificationStatus === NotificationStatus.WAIT;
+
+													return (
+														<MenuItem
+															key={notification._id}
+															onClick={() => handleMenuItemClick(notification)}
+															style={{
+																whiteSpace: 'normal',
+																wordWrap: 'break-word',
+																backgroundColor: isRead ? '#d2e4f7' : '#f8c2c2',
+																borderRadius: 20,
+																padding: '10px',
+																margin: 10,
+															}}
+														>
+															<div style={{ display: 'flex', alignItems: 'center' }}>
+																{notSeen && (
+																	<div
+																		style={{
+																			width: '10px',
+																			height: '10px',
+																			borderRadius: '50%',
+																			backgroundColor: '#42a5f5',
+																			marginRight: '20px',
+																		}}
+																	/>
+																)}
+
+																<div>
+																	<strong>{notification.notificationTitle}</strong>
+																	<p>{notification.notificationDesc}</p>
+																</div>
+															</div>
+														</MenuItem>
+													);
+												})}
+										</Menu>
+									</div>
+								)}
 								<Button
 									disableRipple
 									className="btn-lang"
 									onClick={langClick}
-									endIcon={<CaretDown size={14} color="#616161" weight="fill" />}
+									endIcon={<CaretDown size={25} color="#616161" weight="fill" />}
 								>
 									<Box component={'div'} className={'flag'}>
 										{lang !== null ? (
@@ -245,7 +440,6 @@ const Top = () => {
 										)}
 									</Box>
 								</Button>
-
 								<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose} sx={{ position: 'absolute' }}>
 									<MenuItem disableRipple onClick={langChoice} id="en">
 										<img

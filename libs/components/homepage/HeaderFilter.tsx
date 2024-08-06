@@ -497,7 +497,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 									<div className={'box'}>
 										<span>left count</span>
 										<div className={'inside space-between align-center'}>
-											<FormControl sx={{ width: '122px' }}>
+											{/* <FormControl sx={{ width: '122px' }}>
 												<Select
 													value={searchFilter?.search?.squaresRange?.start}
 													onChange={(e: any) => propertySquareHandler(e, 'start')}
@@ -515,7 +515,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 														</MenuItem>
 													))}
 												</Select>
-											</FormControl>
+											</FormControl> */}
 											<div className={'minus-line'}></div>
 											<FormControl sx={{ width: '122px' }}>
 												<Select
