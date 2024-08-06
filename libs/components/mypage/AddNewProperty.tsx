@@ -50,7 +50,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 			propertyAddress: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyAddress : '',
 			propertyBarter: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyBarter : false,
 			propertyRent: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyRent : false,
-			propertyRooms: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyRooms : 0,
+			propertySizes: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertySizes : 0,
 			propertyBeds: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyBeds : 0,
 			propertySquare: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertySquare : 0,
 			propertyDesc: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyDesc : '',
@@ -120,7 +120,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 			insertPropertyData.propertyAddress === '' || // @ts-ignore
 			insertPropertyData.propertyBarter === '' || // @ts-ignore
 			insertPropertyData.propertyRent === '' ||
-			insertPropertyData.propertyRooms === 0 ||
+			insertPropertyData.propertySizes === 0 ||
 			insertPropertyData.propertyBeds === 0 ||
 			insertPropertyData.propertySquare === 0 ||
 			insertPropertyData.propertyDesc === '' ||
@@ -330,17 +330,17 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Size</Typography>
 									<select
 										className={'select-description'}
-										value={insertPropertyData.propertyRooms || 'select'}
-										defaultValue={insertPropertyData.propertyRooms || 'select'}
+										value={insertPropertyData.propertySizes || 'select'}
+										defaultValue={insertPropertyData.propertySizes || 'select'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyRooms: parseInt(value) })
+											setInsertPropertyData({ ...insertPropertyData, propertySizes: parseInt(value) })
 										}
 									>
 										<option disabled={true} selected={true} value={'select'}>
 											Select
 										</option>
-										{[100, 200, 250, 400, 500].map((room: number) => (
-											<option value={`${room}`}>{room}</option>
+										{[100, 200, 250, 400, 500].map((size: number) => (
+											<option value={`${size}`}>{size}</option>
 										))}
 									</select>
 									<div className={'divider'}></div>
@@ -522,7 +522,7 @@ AddProperty.defaultProps = {
 		propertyAddress: '',
 		propertyBarter: false,
 		propertyRent: false,
-		propertyRooms: 0,
+		propertySizes: 0,
 		propertyBeds: 0,
 		propertySquare: 0,
 		propertyDesc: '',

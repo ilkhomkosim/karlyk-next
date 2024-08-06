@@ -365,7 +365,7 @@ body::-webkit-scrollbar {
 						}
 					}
 				}
-				.filter-rooms {
+				.filter-sizes {
 					position: absolute;
 					padding: 10px 92px;
 					width: 1094px;
@@ -929,7 +929,7 @@ body::-webkit-scrollbar {
 					&.align-center {
 						align-items: center;
 					}
-					div.room {
+					div.size {
 						width: 46px;
 						height: 46px;
 						display: flex;

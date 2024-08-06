@@ -266,7 +266,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 											<img src="/img/icons/1pc.png" alt="" /> <Typography>{property?.propertyBeds} pc/pcs</Typography>
 										</Stack> */}
 										{/* <Stack className="option">
-											<img src="/img/icons/mlg.png" alt="" /> <Typography>{property?.propertyRooms} ml/g</Typography>
+											<img src="/img/icons/mlg.png" alt="" /> <Typography>{property?.propertySizes} ml/g</Typography>
 										</Stack> */}
 										{/* <Stack className="option">
 											<img src="/img/icons/leftcount.png" alt="" /> <Typography>{property?.propertySquare} pcs left</Typography>
@@ -332,7 +332,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className={'option-includes'}>
 											<Typography className={'title'}>Size</Typography>
-											<Typography className={'option-data'}>{property?.propertyRooms}</Typography>
+											<Typography className={'option-data'}>{property?.propertySizes}</Typography>
 										</Stack>
 									</Stack>
 									<Stack className={'option'}>
@@ -397,7 +397,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product size</Typography>
-													<Typography className={'data'}>{property?.propertyRooms}</Typography>
+													<Typography className={'data'}>{property?.propertySizes}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product volume</Typography>

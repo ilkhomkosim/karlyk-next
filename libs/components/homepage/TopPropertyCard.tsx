@@ -48,8 +48,8 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 							<span>{property?.propertyBeds} pc</span>
 						</div>
 						<div>
-							{/* <img src="/img/icons/room.svg" alt="" /> */}
-							<span>{property?.propertyRooms} ml/g</span>
+							{/* <img src="/img/icons/size.svg" alt="" /> */}
+							<span>{property?.propertySizes} ml/g</span>
 						</div>
 						<div>
 							{/* <img src="/img/icons/expand.svg" alt="" /> */}
@@ -102,8 +102,8 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 							<span>{property?.propertyBeds} pc</span>
 						</div>
 						<div>
-							{/* <img src="/img/icons/room.svg" alt="" /> */}
-							<span>{property?.propertyRooms} ml/g</span>
+							{/* <img src="/img/icons/size.svg" alt="" /> */}
+							<span>{property?.propertySizes} ml/g</span>
 						</div>
 						<div>
 							{/* <img src="/img/icons/expand.svg" alt="" /> */}

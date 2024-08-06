@@ -9,7 +9,7 @@ export interface PropertyInput {
 	propertyPrice: number;
 	propertySquare: number;
 	propertyBeds: number;
-	propertyRooms: number;
+	propertySizes: number;
 	propertyImages: string[];
 	propertyDesc?: string;
 	propertyBarter?: boolean;
@@ -22,7 +22,7 @@ interface PISearch {
 	memberId?: string;
 	locationList?: PropertyLocation[];
 	typeList?: PropertyType[];
-	roomsList?: Number[];
+	sizesList?: Number[];
 	options?: string[];
 	bedsList?: Number[];
 	pricesRange?: Range;

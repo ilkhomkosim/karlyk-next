@@ -55,8 +55,8 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 							<span>{property?.propertyBeds} bed</span>
 						</div>
 						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{property?.propertyRooms} rooms</span>
+							<img src="/img/icons/size.svg" alt="" />
+							<span>{property?.propertySizes} sizes</span>
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
@@ -107,8 +107,8 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 							<span>{property?.propertyBeds} bed</span>
 						</div>
 						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{property?.propertyRooms} rooms</span>
+							<img src="/img/icons/size.svg" alt="" />
+							<span>{property?.propertySizes} sizes</span>
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
