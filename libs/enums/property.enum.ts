@@ -13,13 +13,10 @@ export enum PropertyStatus {
 }
 
 export enum PropertyLocation {
-	SEOUL = 'SEOUL',
-	BUSAN = 'BUSAN',
-	INCHEON = 'INCHEON',
-	DAEGU = 'DAEGU',
-	GYEONGJU = 'GYEONGJU',
-	GWANGJU = 'GWANGJU',
-	CHONJU = 'CHONJU',
-	DAEJON = 'DAEJON',
-	JEJU = 'JEJU',
+	Miadong987_456 = 'Miadong987_456',
+	Gangbuk_ku_168 = 'Gangbuk-ku_168',
+	Chungchangte_ro_244 = 'Chungchangte_ro_244',
+	Tongnamgo_168 = 'Tongnamgo_168',
+	Banghakro_23 = 'Banghakro_23',
+	Dongilro_1345 = 'Dongilro_1345',
 }

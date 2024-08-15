@@ -82,20 +82,6 @@ const PropertyCard = (props: PropertyCardType) => {
 					<Box component={'div'} className={'price-box'}>
 						<Typography>${formatterStr(property?.propertyPrice)}</Typography>
 					</Box>
-						{/* <Stack className="type">
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={property.propertyRent ? '' : 'disabled-type'}
-							>
-								Rent
-							</Typography>
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={property.propertyBarter ? '' : 'disabled-type'}
-							>
-								Barter
-							</Typography>
-						</Stack> */}
 						{!recentlyVisited && (
 							<Stack className="buttons">
 								<IconButton color={'default'}>

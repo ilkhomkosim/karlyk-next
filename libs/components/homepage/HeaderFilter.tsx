@@ -373,7 +373,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					</div>
 
 					<div className={`filter-sizes ${openSizes ? 'on' : ''}`} ref={sizesRef}>
-						{[1, 2, 3, 4, 5].map((size: number) => {
+						{[100, 200, 250, 400, 500].map((size: number) => {
 							return (
 								<span onClick={() => propertySizeSelectHandler(size)} key={size}>
 									{size} ml/mg

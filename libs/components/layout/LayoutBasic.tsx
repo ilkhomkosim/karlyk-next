@@ -30,8 +30,8 @@ const withLayoutBasic = (Component: any) => {
 			switch (router.pathname) {
 				case '/property':
 					title = 'Our store ';
-					desc = 'We are all here choose your product!';
-					bgImage = '/img/banner/products.avif';
+					desc = '“The most beautiful makeup is passion. But cosmetics are easier to buy.”';
+					bgImage = '/img/banner/store-bgcimg.avif';
 					break;
 				case '/agent':
 					title = 'Our agents';

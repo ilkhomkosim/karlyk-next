@@ -2,7 +2,7 @@
 	"name": "karlyk-next",
 	"version": "2.2.0",
 	"private": true,
-	"license": "ITC",
+	"license": "UNLICENSED",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",

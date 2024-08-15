@@ -121,7 +121,7 @@ const Top: NextPage = ({ intialValues, ...props }: any) => {
 
 	useEffect(() => {
 		switch (router.pathname) {
-			case '/product/detail':
+			case '/property/detail':
 				setBgColor(true);
 				break;
 			default:
@@ -183,7 +183,7 @@ const Top: NextPage = ({ intialValues, ...props }: any) => {
 		} else if (notification.articleId) {
 			router.push(`/community/detail?id=${notification.articleId}`);
 		} else if (notification.propertyId) {
-			router.push(`/product/detail?id=${notification.propertyId}`);
+			router.push(`/property/detail?id=${notification.propertyId}`);
 		}
 
 		const updateNotification: NotificationUpdate = {
