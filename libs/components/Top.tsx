@@ -84,7 +84,7 @@ const Top: NextPage = ({ intialValues, ...props }: any) => {
 		if (notificationsData?.getNotifcations?.list) {
 			setNotifications(notificationsData.getNotifcations.list);
 			notificationsData.getNotifications.list.forEach((notification: { _id: any }) => {
-				console.log('Notification_id:', notification._id); // check if id is exist
+				console.log('Notification_id:', notification._id); 
 			});
 		}
 	}, [notificationsData]);
@@ -248,10 +248,6 @@ const Top: NextPage = ({ intialValues, ...props }: any) => {
 			},
 		},
 	}));
-
-	// const toggleNotifications = () => {
-	// 	setShowNotifications((prev) => !prev);
-	// };
 
 	if (typeof window !== 'undefined') {
 		window.addEventListener('scroll', changeNavbarColor);

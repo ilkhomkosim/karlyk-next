@@ -34,14 +34,14 @@ const withLayoutBasic = (Component: any) => {
 					bgImage = '/img/banner/store-bgcimg.avif';
 					break;
 				case '/agent':
-					title = 'Our agents';
-					desc = 'We are creating for you';
+					title = '';
+					desc = '';
 					bgImage = '/img/banner/agents.jpg';
 					break;
 				case '/agent/detail':
-					title = 'Agent Page';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					title = 'Agents Page';
+					desc = 'Do not search intead we will offer you the best';
+					bgImage = '/img/banner/agents.jpg';
 					break;
 				case '/mypage':
 					title = 'My page';
@@ -60,8 +60,8 @@ const withLayoutBasic = (Component: any) => {
 					break;
 				case '/cs':
 					title = 'CS';
-					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
+					desc = 'The best way to understand each other is conversation!';
+					bgImage = '/img/banner/cs.jpg';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';

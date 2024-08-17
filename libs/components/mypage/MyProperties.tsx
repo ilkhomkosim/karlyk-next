@@ -97,8 +97,8 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 			<div id="my-property-page">
 				<Stack className="main-title-box">
 					<Stack className="right-box">
-						<Typography className="main-title">My Properties</Typography>
-						<Typography className="sub-title">We are glad to see you again!</Typography>
+						<Typography className="main-title">My Products</Typography>
+						<Typography className="sub-title">Thank you adding products!</Typography>
 					</Stack>
 				</Stack>
 				<Stack className="property-list-box">

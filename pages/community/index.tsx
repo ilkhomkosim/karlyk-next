@@ -113,10 +113,9 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 					<TabContext value={searchCommunity.search.articleCategory}>
 						<Stack className="main-box">
 						<Stack className="left-config">
-							<Stack className={'community-name'}>
-								{/* <Box className={'name'}>Karlyk community</Box> */}
-							</Stack>
-
+							{/* <Stack className={'community-name'}>
+								<Box className={'name'}>Karlyk community</Box>
+							</Stack> */}
 								<TabList
 									orientation="horizontal"
 									aria-label="lab API tabs example"

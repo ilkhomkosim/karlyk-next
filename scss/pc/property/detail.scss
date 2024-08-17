@@ -376,6 +376,7 @@
 						padding: 30px 38px 45px 38px;
 						border-radius: 12px;
 						border: 1px solid #c4c4c4;
+						background-color: #d4b390;
 						.filter-box {
 							width: 100%;
 							height: auto;
@@ -396,6 +397,7 @@
 									font-style: normal;
 									font-weight: 600;
 									line-height: normal;
+									background-color: #d4b390;
 								}
 							}
 							.select-box {
@@ -503,7 +505,7 @@
 					.leave-review-config {
 						border-radius: 12px;
 						border: 1px solid #c4c4c4;
-						background: #fff;
+						background: #d4b390;
 						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 						padding: 30px 38px;
 						.main-title {
@@ -693,7 +695,7 @@
 							align-items: center;
 							gap: 10px;
 							border-radius: 12px;
-							background: #eb6753;
+							background: #d4b390;
 							.title {
 								color: #fff;
 								font-family: $font;

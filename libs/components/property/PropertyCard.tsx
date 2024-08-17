@@ -62,7 +62,7 @@ const PropertyCard = (props: PropertyCardType) => {
 						</Stack>
 						<Stack className="address">
 							<Typography>
-								{property.propertyAddress}, {property.propertyLocation}
+								{property.propertyLocation}
 							</Typography>
 						</Stack>
 					</Stack>

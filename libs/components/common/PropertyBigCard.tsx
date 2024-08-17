@@ -28,7 +28,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 	};
 
 	if (device === 'mobile') {
-		return <div>APARTMEND BIG CARD</div>;
+		return <div>PRODUCT BIG CARD</div>;
 	} else {
 		return (
 			<Stack className="property-big-card-box" onClick={() => goPropertyDetatilPage(property?._id)}>
@@ -43,32 +43,27 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 							<span>top</span>
 						</div>
 					)}
-
-					<div className={'price'}>${formatterStr(property?.propertyPrice)}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'}>{property?.propertyTitle}</strong>
-					<p className={'desc'}>{property?.propertyAddress}</p>
+					<p className={'desc'}>{property?.propertyLocation}</p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property?.propertyBeds} bed</span>
+							<img src="/img/icons/volume.png" alt="" />
+							<span>{property?.propertyBeds} pc</span>
 						</div>
 						<div>
-							<img src="/img/icons/size.svg" alt="" />
-							<span>{property?.propertySizes} sizes</span>
+							<img src="/img/icons/mlg.png" alt="" />
+							<span>{property?.propertySizes}ml/g</span>
 						</div>
 						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property?.propertySquare} m2</span>
+							<img src="/img/icons/leftcount.png" alt="" />
+							<span>{property?.propertySquare}pcs left</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<div>
-							{property?.propertyRent ? <p>Rent</p> : <span>Rent</span>}
-							{property?.propertyBarter ? <p>Barter</p> : <span>Barter</span>}
-						</div>
+					<div className={'price'}>${formatterStr(property?.propertyPrice)}</div>
 						<div className="buttons-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />

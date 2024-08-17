@@ -219,27 +219,6 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Typography className={'city'}>{property?.propertyLocation}</Typography>
 										<Stack className={'divider'}></Stack>
 										<Stack className={'buy-rent-box'}>
-											{property?.propertyBarter && (
-												// <>
-												// 	<Stack className={'circle'}>
-												// 		<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-												// 			<circle cx="3" cy="3" r="3" fill="#EB6753" />
-												// 		</svg>
-												// 	</Stack>
-													{/* <Typography className={'buy-rent'}>Barter</Typography> */}
-												// </>
-											)}
-
-											{property?.propertyRent && (
-												<>
-													{/* <Stack className={'circle'}>
-														<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-															<circle cx="3" cy="3" r="3" fill="#EB6753" />
-														</svg>
-													</Stack> */}
-													{/* <Typography className={'buy-rent'}>rent</Typography> */}
-												</>
-											)}
 										</Stack>
 										<Stack className={'divider'}></Stack>
 										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -260,17 +239,6 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 											</defs>
 										</svg>
 										<Typography className={'date'}>{moment().diff(property?.createdAt, 'days')} days ago</Typography>
-									</Stack>
-									<Stack className={'bottom-box'}>
-										{/* <Stack className="option">
-											<img src="/img/icons/1pc.png" alt="" /> <Typography>{property?.propertyBeds} pc/pcs</Typography>
-										</Stack> */}
-										{/* <Stack className="option">
-											<img src="/img/icons/mlg.png" alt="" /> <Typography>{property?.propertySizes} ml/g</Typography>
-										</Stack> */}
-										{/* <Stack className="option">
-											<img src="/img/icons/leftcount.png" alt="" /> <Typography>{property?.propertySquare} pcs left</Typography>
-										</Stack> */}
 									</Stack>
 								</Stack>
 								<Stack className={'right-box'}>
@@ -393,42 +361,32 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Left count</Typography>
-													<Typography className={'data'}>{property?.propertySquare}</Typography>
+													<Typography className={'data'}>{property?.propertySquare} pcs</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product size</Typography>
-													<Typography className={'data'}>{property?.propertySizes}</Typography>
+													<Typography className={'data'}>{property?.propertySizes} ml/g</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product volume</Typography>
-													<Typography className={'data'}>{property?.propertyBeds}</Typography>
+													<Typography className={'data'}>{property?.propertyBeds} pc</Typography>
 												</Box>
 											</Stack>
 											<Stack className={'right'}>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Produced in</Typography>
-													<Typography className={'data'}>{moment(property?.createdAt).format('YYYY')}</Typography>
+													<Typography className={'data'}>{moment(property?.createdAt).format('YYYY-MM-DD')}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product Type</Typography>
 													<Typography className={'data'}>{property?.propertyType}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
-													{/* <Typography className={'title'}>Property Options</Typography>
-													<Typography className={'data'}>
-														For {property?.propertyBarter && 'Barter'} {property?.propertyRent && 'Rent'}
-													</Typography> */}
 												</Box>
 											</Stack>
 										</Stack>
 									</Stack>
 								</Stack>
-								{/* <Stack className={'floor-plans-config'}>
-									<Typography className={'title'}>Floor Plans</Typography>
-									<Stack className={'image-box'}>
-										<img src={'/img/property/floorPlan.png'} alt={'image'} />
-									</Stack>
-								</Stack> */}
 								<Stack className={'address-config'}>
 									<Typography className={'title'}>Address</Typography>
 									<Stack className={'map-box'}>
@@ -587,10 +545,6 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 						{destinationProperties.length !== 0 && (
 							<Stack className={'similar-properties-config'}>
 								<Stack className={'title-pagination-box'}>
-									<Stack className={'title-box'}>
-										{/* <Typography className={'main-title'}>Destination Property</Typography> */}
-										{/* <Typography className={'sub-title'}>Aliquam lacinia diam quis lacus euismod</Typography> */}
-									</Stack>
 									<Stack className={'pagination-box'}>
 										<WestIcon className={'swiper-similar-prev'} />
 										<div className={'swiper-similar-pagination'}></div>
