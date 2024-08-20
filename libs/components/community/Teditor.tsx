@@ -7,11 +7,11 @@ import { REACT_APP_API_URL } from '../../config';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { T } from '../../types/common';
+import '@toast-ui/editor/dist/toastui-editor.css';
 import { useMutation } from '@apollo/client';
 import { CREATE_BOARD_ARTICLE } from '../../../apollo/user/mutation';
-import { Message } from '../../enums/common.enum';
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../sweetAlert';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import { Message } from '../../enums/common.enum';
 
 const TuiEditor = () => {
 	const editorRef = useRef<Editor>(null),
@@ -20,7 +20,7 @@ const TuiEditor = () => {
 	const [articleCategory, setArticleCategory] = useState<BoardArticleCategory>(BoardArticleCategory.FREE);
 
 	/** APOLLO REQUESTS **/
-	const [createboardArticle] = useMutation(CREATE_BOARD_ARTICLE)
+	const [createboardArticle] = useMutation(CREATE_BOARD_ARTICLE);
 
 	const memoizedValues = useMemo(() => {
 		const articleTitle = '',
@@ -39,7 +39,7 @@ const TuiEditor = () => {
 				JSON.stringify({
 					query: `mutation ImageUploader($file: Upload!, $target: String!) {
 						imageUploader(file: $file, target: $target) 
-				}`,
+				  }`,
 					variables: {
 						file: null,
 						target: 'article',
@@ -82,19 +82,21 @@ const TuiEditor = () => {
 	};
 
 	const handleRegisterButton = async () => {
-		try{
+		try {
 			const editor = editorRef.current;
 			const articleContent = editor?.getInstance().getHTML() as string;
+			console.log('articleContent:', articleContent);
+			
 			memoizedValues.articleContent = articleContent;
 
-			if(memoizedValues.articleContent === '' && memoizedValues.articleTitle === '') {
-				throw new Error(Message.INSERT_ALL_INPUTS)
+			if (memoizedValues.articleContent === '' && memoizedValues.articleTitle === '') {
+				throw new Error(Message.INSERT_ALL_INPUTS);
 			}
 
 			await createboardArticle({
 				variables: {
-					input: {...memoizedValues, articleCategory},
-				}
+					input: { ...memoizedValues, articleCategory },
+				},
 			});
 
 			await sweetTopSmallSuccessAlert('Article is created successfully', 700);
@@ -104,12 +106,12 @@ const TuiEditor = () => {
 					category: 'myArticles',
 				},
 			});
-		} catch(err: any) {
-			console.log(err);
+		} catch (err: any) {
+			console.log('Error on handleRegisterButton:', err);
 			sweetErrorHandling(new Error(Message.INSERT_ALL_INPUTS)).then();
 		}
 	};
-
+// 
 	const doDisabledCheck = () => {
 		if (memoizedValues.articleContent === '' || memoizedValues.articleTitle === '') {
 			return true;
@@ -168,6 +170,7 @@ const TuiEditor = () => {
 				hooks={{
 					addImageBlobHook: async (image: any, callback: any) => {
 						console.log('image:', image);
+
 						const uploadedImageURL = await uploadImage(image);
 						callback(uploadedImageURL);
 						return false;

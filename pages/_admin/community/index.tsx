@@ -34,36 +34,36 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 	const [removeBoardArticleByAdmin] = useMutation(REMOVE_BOARD_ARTICLE_BY_ADMIN);
 
 	const {
-		loading: getAllBoardArticleByAdminLoading,
-		data: getAllBoardArticleByAdminData,
-		error: getAllBoardArticleByAdminError,
-		refetch: getAllBoardArticleByAdminRefetch,
+		loading: getAllBoardArticlesByAdminLoading,
+		data: getAllBoardArticlesByAdminData,
+		error: getAllBoardArticlesByAdminError,
+		refetch: getAllBoardArticlesByAdminRefetch,
 	} = useQuery(GET_ALL_BOARD_ARTICLES_BY_ADMIN, {
-		fetchPolicy: "network-only",
-		variables: {input: communityInquiry},
+		fetchPolicy: 'network-only',
+		variables: { input: communityInquiry },
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			setArticles(data?.getAllBoardArticleByAdmin?.list);
-			setArticleTotal(data?.getAllBoardArticleByAdmin?.metaCounter[0]?.total ?? 0)
-		}
+		onCompleted(data: T) {
+			setArticles(data?.getAllBoardArticlesByAdmin?.list);
+			setArticleTotal(data.getAllBoardArticlesByAdmin?.metaCounter?.[0]?.total ?? 0);
+		},
 	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		getAllBoardArticleByAdminRefetch({input: communityInquiry}).then();
+		getAllBoardArticlesByAdminRefetch({ input: communityInquiry }).then();
 	}, [communityInquiry]);
 
 	/** HANDLERS **/
 	const changePageHandler = async (event: unknown, newPage: number) => {
 		communityInquiry.page = newPage + 1;
-		await getAllBoardArticleByAdminRefetch({input: communityInquiry});
+		await getAllBoardArticlesByAdminRefetch({ input: communityInquiry });
 		setCommunityInquiry({ ...communityInquiry });
 	};
 
 	const changeRowsPerPageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		communityInquiry.limit = parseInt(event.target.value, 10);
 		communityInquiry.page = 1;
-		await getAllBoardArticleByAdminRefetch({input: communityInquiry});
+		await getAllBoardArticlesByAdminRefetch({ input: communityInquiry });
 		setCommunityInquiry({ ...communityInquiry });
 	};
 
@@ -124,12 +124,12 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 			console.log('+updateData: ', updateData);
 			await updateBoardArticleByAdmin({
 				variables: {
-					input: updateData
-				}
+					input: updateData,
+				},
 			});
 
 			menuIconCloseHandler();
-			await getAllBoardArticleByAdminRefetch({input: communityInquiry})
+			await getAllBoardArticlesByAdminRefetch({ input: communityInquiry });
 		} catch (err: any) {
 			menuIconCloseHandler();
 			sweetErrorHandling(err).then();
@@ -139,14 +139,12 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 	const removeArticleHandler = async (id: string) => {
 		try {
 			if (await sweetConfirmAlert('Are you sure to remove?')) {
-				await updateBoardArticleByAdmin({
+				await removeBoardArticleByAdmin({
 					variables: {
 						input: id,
-					}
+					},
 				});
-
-				await getAllBoardArticleByAdminRefetch({input: communityInquiry})
-
+				await getAllBoardArticlesByAdminRefetch({ input: communityInquiry });
 			}
 		} catch (err: any) {
 			sweetErrorHandling(err).then();

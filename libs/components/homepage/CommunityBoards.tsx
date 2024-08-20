@@ -4,9 +4,9 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Stack, Typography } from '@mui/material';
 import CommunityCard from './CommunityCard';
 import { BoardArticle } from '../../types/board-article/board-article';
-import { useQuery } from '@apollo/client';
 import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
 import { T } from '../../types/common';
+import { useQuery } from '@apollo/client';
 import { BoardArticleCategory } from '../../enums/board-article.enum';
 
 const CommunityBoards = () => {
@@ -26,26 +26,26 @@ const CommunityBoards = () => {
 		error: getNewsArticlesError,
 		refetch: getNewsArticlesRefetch,
 	} = useQuery(GET_BOARD_ARTICLES, {
-		fetchPolicy: "cache-and-network",
-		variables: {input: {...searchCommunity, limit: 6, search: {articleCategory: BoardArticleCategory.NEWS}}},
+		fetchPolicy: 'network-only', // cach + =>network
+		variables: { input: { ...searchCommunity, limit: 6, search: { articleCategory: BoardArticleCategory.NEWS } } },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setNewsArticles(data?.getBoardArticles?.list);
-		}
+		},
 	});
 
 	const {
 		loading: getFreeArticlesLoading,
-		data: getFreesArticlesData,
-		error: getFreeArticlesError,
+		data: getFreeArticlesData,
+		error: geFreeArticlesError,
 		refetch: getFreeArticlesRefetch,
 	} = useQuery(GET_BOARD_ARTICLES, {
-		fetchPolicy: "cache-and-network",
-		variables: {input: {...searchCommunity, limit: 3, search: {articleCategory: BoardArticleCategory.FREE}}},
+		fetchPolicy: 'network-only', // cach + =>network
+		variables: { input: { ...searchCommunity, limit: 3, search: { articleCategory: BoardArticleCategory.FREE } } },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setFreeArticles(data?.getBoardArticles?.list);
-		}
+		},
 	});
 
 	if (device === 'mobile') {
@@ -55,7 +55,7 @@ const CommunityBoards = () => {
 			<Stack className={'community-board'}>
 				<Stack className={'container'}>
 					<Stack>
-						<Typography  className={'article'} variant={'h1'}>Read And Write Articles To Get More Advice And Information Update</Typography>
+						<Typography variant={'h1'}>Read And Write Articles To Get More Advice And Information Update</Typography>
 					</Stack>
 					<Stack className="community-main">
 						<Stack className={'community-left'}>
