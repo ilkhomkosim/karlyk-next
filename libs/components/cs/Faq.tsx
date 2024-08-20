@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/client';
 import { T } from '../../types/common';
 import { NextPage } from 'next';
 
-const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
+const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} leftCount {...props} />)(
 	({ theme }) => ({
 		border: `1px solid ${theme.palette.divider}`,
 		'&:not(:last-child)': {

@@ -4,16 +4,13 @@ import { Direction } from '../../enums/common.enum';
 export interface PropertyInput {
 	propertyType: PropertyType;
 	propertyLocation: PropertyLocation;
-	propertyAddress: string;
 	propertyTitle: string;
 	propertyPrice: number;
-	propertySquare: number;
-	propertyBeds: number;
+	propertyLeftCount: number;
+	propertyVolumes: number;
 	propertySizes: number;
 	propertyImages: string[];
 	propertyDesc?: string;
-	propertyBarter?: boolean;
-	propertyRent?: boolean;
 	memberId?: string;
 	constructedAt?: Date;
 }
@@ -27,7 +24,7 @@ interface PISearch {
 	bedsList?: Number[];
 	pricesRange?: Range;
 	periodsRange?: PeriodsRange;
-	squaresRange?: Range;
+	leftCountsRange?: Range;
 	text?: string;
 }
 

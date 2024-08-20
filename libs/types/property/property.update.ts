@@ -5,16 +5,13 @@ export interface PropertyUpdate {
 	propertyType?: PropertyType;
 	propertyStatus?: PropertyStatus;
 	propertyLocation?: PropertyLocation;
-	propertyAddress?: string;
 	propertyTitle?: string;
 	propertyPrice?: number;
-	propertySquare?: number;
-	propertyBeds?: number;
+	propertyLeftCount?: number;
+	propertyVolumes?: number;
 	propertySizes?: number;
 	propertyImages?: string[];
 	propertyDesc?: string;
-	propertyBarter?: boolean;
-	propertyRent?: boolean;
 	soldAt?: Date;
 	deletedAt?: Date;
 	constructedAt?: Date;

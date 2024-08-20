@@ -222,7 +222,7 @@ PropertyList.defaultProps = {
 		sort: 'createdAt',
 		direction: 'DESC',
 		search: {
-			squaresRange: {
+			leftCountsRange: {
 				start: 0,
 				end: 500,
 			},

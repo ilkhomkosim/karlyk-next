@@ -63,7 +63,6 @@ const CommunityBoards = () => {
 								<Link href={'/community?articleCategory=NEWS'}>
 									<span>News</span>
 								</Link>
-								{/* <img src="/img/icons/arrowBig.svg" alt="" /> */}
 							</Stack>
 							<Stack className={'card-wrap'}>
 								{newsArticles.map((article, index) => {
@@ -76,7 +75,6 @@ const CommunityBoards = () => {
 								<Link href={'/community?articleCategory=FREE'}>
 									<span>Free</span>
 								</Link>
-								{/* <img src="/img/icons/arrowBig.svg" alt="" /> */}
 							</Stack>
 							<Stack className={'card-wrap vertical'}>
 								{freeArticles.map((article, index) => {

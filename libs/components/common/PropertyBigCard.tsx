@@ -50,7 +50,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/volume.png" alt="" />
-							<span>{property?.propertyBeds} pc</span>
+							<span>{property?.propertyVolumes} pc</span>
 						</div>
 						<div>
 							<img src="/img/icons/mlg.png" alt="" />
@@ -58,7 +58,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 						</div>
 						<div>
 							<img src="/img/icons/leftcount.png" alt="" />
-							<span>{property?.propertySquare}pcs left</span>
+							<span>{property?.propertyLeftCount}pcs left</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />

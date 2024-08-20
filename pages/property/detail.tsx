@@ -291,7 +291,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className={'option-includes'}>
 											<Typography className={'title'}>Volume</Typography>
-											<Typography className={'option-data'}>{property?.propertyBeds}</Typography>
+											<Typography className={'option-data'}>{property?.propertyVolumes}</Typography>
 										</Stack>
 									</Stack>
 									<Stack className={'option'}>
@@ -327,7 +327,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className={'option-includes'}>
 											<Typography className={'title'}>Left count</Typography>
-											<Typography className={'option-data'}>{property?.propertySquare} pcs left</Typography>
+											<Typography className={'option-data'}>{property?.propertyLeftCount} pcs left</Typography>
 										</Stack>
 									</Stack>
 									<Stack className={'option'}>
@@ -361,7 +361,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Left count</Typography>
-													<Typography className={'data'}>{property?.propertySquare} pcs</Typography>
+													<Typography className={'data'}>{property?.propertyLeftCount} pcs</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product size</Typography>
@@ -369,7 +369,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Product volume</Typography>
-													<Typography className={'data'}>{property?.propertyBeds} pc</Typography>
+													<Typography className={'data'}>{property?.propertyVolumes} pc</Typography>
 												</Box>
 											</Stack>
 											<Stack className={'right'}>

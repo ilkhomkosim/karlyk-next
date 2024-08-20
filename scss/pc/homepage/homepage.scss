@@ -969,7 +969,7 @@
 						flex-direction: column;
 						.card-wrap {
 							display: flex;
-							flex-direction: row;
+							flex-direction: column;
 							flex-wrap: wrap;
 							.vertical-card {
 								margin-right: 12px;
@@ -990,7 +990,7 @@
 										display: flex;
 										justify-content: center;
 										align-items: center;
-										background: #f54d56;
+										background: #d4b390;
 										border-radius: 5px 0px;
 										font-family: $font;
 										font-style: normal;
@@ -998,7 +998,7 @@
 										font-size: 19px;
 										line-height: 36px;
 										letter-spacing: -0.015em;
-										color: #bdbdbd;
+										color: #fff;
 									}
 								}
 								strong {

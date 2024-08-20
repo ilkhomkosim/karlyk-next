@@ -16,7 +16,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 	const device = useDeviceDetect();
 	const articleImage = article?.articleImage
 		? `${process.env.REACT_APP_API_URL}/${article?.articleImage}`
-		: '/img/event.svg';
+		: '/img/community/community.jpg';
 
 	if (device === 'mobile') {
 		return <div>COMMUNITY CARD (MOBILE)</div>;
@@ -29,7 +29,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 							<div>{index + 1}</div>
 						</div>
 						<strong>{article?.articleTitle}</strong>
-						<span>Free Board</span>
+						<span>News Board</span>
 					</Box>
 				</Link>
 			);

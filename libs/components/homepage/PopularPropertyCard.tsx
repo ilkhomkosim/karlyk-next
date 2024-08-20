@@ -48,11 +48,10 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'}					onClick={() => {pushDetailhandler(property._id)}}
 					>{property.propertyTitle}</strong>
-					<p className={'desc'}>{property.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property?.propertyBeds} bed</span>
+							<img src="/img/icons/volume.svg" alt="" />
+							<span>{property?.propertyVolumes} volume</span>
 						</div>
 						<div>
 							<img src="/img/icons/size.svg" alt="" />
@@ -60,12 +59,11 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property?.propertySquare} m2</span>
+							<span>{property?.propertyLeftCount} m2</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<p>{property?.propertyRent ? 'rent' : 'sale'}</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />
@@ -100,11 +98,10 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'} 					onClick={() => {pushDetailhandler(property._id)}}
 					>{property.propertyTitle}</strong>
-					<p className={'desc'}>{property.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property?.propertyBeds} bed</span>
+							<img src="/img/icons/volume.svg" alt="" />
+							<span>{property?.propertyVolumes} volume</span>
 						</div>
 						<div>
 							<img src="/img/icons/size.svg" alt="" />
@@ -112,12 +109,11 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property?.propertySquare} m2</span>
+							<span>{property?.propertyLeftCount} m2</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<p>{property?.propertyRent ? 'rent' : 'sale'}</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />

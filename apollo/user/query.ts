@@ -89,18 +89,15 @@ export const GET_PROPERTY = gql`
 			propertyType
 			propertyStatus
 			propertyLocation
-			propertyAddress
 			propertyTitle
 			propertyPrice
-			propertySquare
-			propertyBeds
+			propertyLeftCount
+			propertyVolumes
 			propertySizes
 			propertyViews
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
 			memberId
 			soldAt
 			deletedAt
@@ -145,19 +142,16 @@ export const GET_PROPERTIES = gql`
 				propertyType
 				propertyStatus
 				propertyLocation
-				propertyAddress
 				propertyTitle
 				propertyPrice
-				propertySquare
-				propertyBeds
+				propertyLeftCount
+				propertyVolumes
 				propertySizes
 				propertyViews
 				propertyLikes
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
 				memberId
 				soldAt
 				deletedAt
@@ -207,18 +201,15 @@ export const GET_AGENT_PROPERTIES = gql`
 				propertyType
 				propertyStatus
 				propertyLocation
-				propertyAddress
 				propertyTitle
 				propertyPrice
-				propertySquare
-				propertyBeds
+				propertyLeftCount
+				propertyVolumes
 				propertySizes
 				propertyViews
 				propertyLikes
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
 				memberId
 				soldAt
 				deletedAt
@@ -241,11 +232,10 @@ export const GET_FAVORITES = gql`
 				propertyType
 				propertyStatus
 				propertyLocation
-				propertyAddress
 				propertyTitle
 				propertyPrice
-				propertySquare
-				propertyBeds
+				propertyLeftCount
+				propertyVolumes
 				propertySizes
 				propertyViews
 				propertyLikes
@@ -253,8 +243,6 @@ export const GET_FAVORITES = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
 				memberId
 				soldAt
 				deletedAt
@@ -304,11 +292,10 @@ export const GET_VISITED = gql`
 				propertyType
 				propertyStatus
 				propertyLocation
-				propertyAddress
 				propertyTitle
 				propertyPrice
-				propertySquare
-				propertyBeds
+				propertyLeftCount
+				propertyVolumes
 				propertySizes
 				propertyViews
 				propertyLikes
@@ -316,8 +303,6 @@ export const GET_VISITED = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
-				propertyRent
 				memberId
 				soldAt
 				deletedAt

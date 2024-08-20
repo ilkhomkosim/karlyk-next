@@ -105,7 +105,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 		};
 
 	if (device === 'mobile') {
-		return <h1>COMMUNITY PAGE MOBILE</h1>;
+		return <h1>ARTICLE PAGE MOBILE</h1>;
 	} else {
 		return (
 			<div id="community-list-page">

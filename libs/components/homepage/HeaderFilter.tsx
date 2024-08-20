@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { propertySquare, propertyYears } from '../../config';
+import { propertyLeftCount, propertyYears } from '../../config';
 import { PropertyLocation, PropertyType } from '../../enums/property.enum';
 import { PropertiesInquiry } from '../../types/property/property.input';
 import { useRouter } from 'next/router';
@@ -165,7 +165,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 		[searchFilter],
 	);
 
-	const propertyBedSelectHandler = useCallback(
+	const propertyVolumeSelectHandler = useCallback(
 		async (number: Number) => {
 			try {
 				if (number != 0) {
@@ -188,9 +188,9 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					setSearchFilter({ ...searchFilter });
 				}
 
-				console.log('propertyBedSelectHandler:', number);
+				console.log('propertyVolumeSelectHandler:', number);
 			} catch (err: any) {
-				console.log('ERROR, propertyBedSelectHandler:', err);
+				console.log('ERROR, propertyVolumeSelectHandler:', err);
 			}
 		},
 		[searchFilter],
@@ -226,7 +226,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 		[searchFilter],
 	);
 
-	const propertySquareHandler = useCallback(
+	const propertyLeftCountHandler = useCallback(
 		async (e: any, type: string) => {
 			const value = e.target.value;
 
@@ -236,7 +236,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					search: {
 						...searchFilter.search,
 						// @ts-ignore
-						squaresRange: { ...searchFilter.search.squaresRange, start: parseInt(value) },
+						leftCountsRange: { ...searchFilter.search.leftCountsRange, start: parseInt(value) },
 					},
 				});
 			} else {
@@ -245,7 +245,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					search: {
 						...searchFilter.search,
 						// @ts-ignore
-						squaresRange: { ...searchFilter.search.squaresRange, end: parseInt(value) },
+						leftCountsRange: { ...searchFilter.search.leftCountsRange, end: parseInt(value) },
 					},
 				});
 			}
@@ -421,17 +421,17 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 										<div className={'inside'}>
 											<div
 												className={`size ${!searchFilter?.search?.bedsList ? 'active' : ''}`}
-												onClick={() => propertyBedSelectHandler(0)}
+												onClick={() => propertyVolumeSelectHandler(0)}
 											>
 												Any
 											</div>
-											{[1, 2, 3, 4, 5].map((bed: number) => (
+											{[1, 2, 3, 4, 5].map((volume: number) => (
 												<div
-													className={`size ${searchFilter?.search?.bedsList?.includes(bed) ? 'active' : ''}`}
-													onClick={() => propertyBedSelectHandler(bed)}
-													key={bed}
+													className={`size ${searchFilter?.search?.bedsList?.includes(volume) ? 'active' : ''}`}
+													onClick={() => propertyVolumeSelectHandler(volume)}
+													key={volume}
 												>
-													{bed == 0 ? 'Any' : bed}
+													{volume == 0 ? 'Any' : volume}
 												</div>
 											))}
 										</div>
@@ -499,19 +499,19 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 										<div className={'inside space-between align-center'}>
 											{/* <FormControl sx={{ width: '122px' }}>
 												<Select
-													value={searchFilter?.search?.squaresRange?.start}
-													onChange={(e: any) => propertySquareHandler(e, 'start')}
+													value={searchFilter?.search?.leftCountsRange?.start}
+													onChange={(e: any) => propertyLeftCountHandler(e, 'start')}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
 												>
-													{propertySquare.map((square: number) => (
+													{propertyLeftCount.map((leftCount: number) => (
 														<MenuItem
-															value={square}
-															disabled={(searchFilter?.search?.squaresRange?.end || 0) < square}
-															key={square}
+															value={leftCount}
+															disabled={(searchFilter?.search?.leftCountsRange?.end || 0) < leftCount}
+															key={leftCount}
 														>
-															{square}
+															{leftCount}
 														</MenuItem>
 													))}
 												</Select>
@@ -519,19 +519,19 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 											<div className={'minus-line'}></div>
 											<FormControl sx={{ width: '122px' }}>
 												<Select
-													value={searchFilter?.search?.squaresRange?.end}
-													onChange={(e: any) => propertySquareHandler(e, 'end')}
+													value={searchFilter?.search?.leftCountsRange?.end}
+													onChange={(e: any) => propertyLeftCountHandler(e, 'end')}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
 												>
-													{propertySquare.map((square: number) => (
+													{propertyLeftCount.map((leftCount: number) => (
 														<MenuItem
-															value={square}
-															disabled={(searchFilter?.search?.squaresRange?.start || 0) > square}
-															key={square}
+															value={leftCount}
+															disabled={(searchFilter?.search?.leftCountsRange?.start || 0) > leftCount}
+															key={leftCount}
 														>
-															{square}
+															{leftCount}
 														</MenuItem>
 													))}
 												</Select>
@@ -567,7 +567,7 @@ HeaderFilter.defaultProps = {
 		page: 1,
 		limit: 9,
 		search: {
-			squaresRange: {
+			leftCountsRange: {
 				start: 0,
 				end: 500,
 			},

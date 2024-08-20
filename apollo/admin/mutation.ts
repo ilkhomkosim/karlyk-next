@@ -44,18 +44,15 @@ export const UPDATE_PROPERTY_BY_ADMIN = gql`
 			propertyType
 			propertyStatus
 			propertyLocation
-			propertyAddress
 			propertyTitle
 			propertyPrice
-			propertySquare
-			propertyBeds
+			propertyLeftCount
+			propertyVolumes
 			propertySizes
 			propertyViews
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
 			memberId
 			soldAt
 			deletedAt
@@ -72,19 +69,16 @@ export const REMOVE_PROPERTY_BY_ADMIN = gql`
 			_id
 			propertyType
 			propertyStatus
-			propertyLocation
-			propertyAddress
+			propertyLocation			
 			propertyTitle
 			propertyPrice
-			propertySquare
-			propertyBeds
+			propertyLeftCount
+			propertyVolumes
 			propertySizes
 			propertyViews
 			propertyLikes
 			propertyImages
 			propertyDesc
-			propertyBarter
-			propertyRent
 			memberId
 			soldAt
 			deletedAt

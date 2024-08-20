@@ -72,10 +72,6 @@ const Join: NextPage = () => {
 					<Stack className={'main'}>
 						<Stack className={'left'}>
 							{/* @ts-ignore */}
-							<Box className={'logo'}>
-								<img src="/img/logo/logoText.svg" alt="" />
-								<span>Karlyk</span>
-							</Box>
 							<Box className={'info'}>
 								<span>{loginView ? 'login' : 'signup'}</span>
 								<p>{loginView ? 'Login' : 'Sign'} in with this account across the following sites.</p>
@@ -125,7 +121,7 @@ const Join: NextPage = () => {
 							<Box className={'register'}>
 								{!loginView && (
 									<div className={'type-option'}>
-										<span className={'text'}>I want to be registered as:</span>
+										<span className={'text'}>Register as:</span>
 										<div>
 											<FormGroup>
 												<FormControlLabel
@@ -162,7 +158,7 @@ const Join: NextPage = () => {
 										<FormGroup>
 											<FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Remember me" />
 										</FormGroup>
-										<a>Lost your password?</a>
+										<a>Forgot password?</a>
 									</div>
 								)}
 
@@ -206,7 +202,6 @@ const Join: NextPage = () => {
 								)}
 							</Box>
 						</Stack>
-						<Stack className={'right'}></Stack>
 					</Stack>
 				</Stack>
 			</Stack>

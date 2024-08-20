@@ -44,13 +44,13 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 					<p className={'desc'}>{property?.propertyLocation}</p>
 					<div className={'options'}>
 						<div>
-							<span>{property?.propertyBeds} pc</span>
+							<span>{property?.propertyVolumes} pc</span>
 						</div>
 						<div>
 							<span>{property?.propertySizes} ml/g</span>
 						</div>
 						<div>
-							<span>{property?.propertySquare} pcs left</span>
+							<span>{property?.propertyLeftCount} pcs left</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
@@ -90,13 +90,13 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 					<p className={'desc'}>{property?.propertyLocation}</p>
 					<div className={'options'}>
 						<div>
-							<span>{property?.propertyBeds} pc</span>
+							<span>{property?.propertyVolumes} pc</span>
 						</div>
 						<div>
 							<span>{property?.propertySizes} ml/g</span>
 						</div>
 						<div>
-							<span>{property?.propertySquare} pcs left</span>
+							<span>{property?.propertyLeftCount} pcs left</span>
 						</div>
 					</div>
 					<Divider className={'devider'} sx={{ mt: '15px', mb: '17px' }} />

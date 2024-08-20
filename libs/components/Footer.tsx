@@ -54,10 +54,10 @@ const Footer = () => {
 							</div>
 							<div>
 								<strong>Discover</strong>
-								<span>Seoul</span>
-								<span>Gyeongido</span>
-								<span>Busan</span>
-								<span>Jejudo</span>
+								<span>Gangbuk_ku_168</span>
+								<span>Chungchangte_24</span>
+								<span>Banghakro_23</span>
+								<span>Dongilro_1345</span>
 							</div>
 						</Box>
 					</Stack>
@@ -119,10 +119,10 @@ const Footer = () => {
 							</div>
 							<div>
 								<strong>Discover</strong>
-								<span>Seoul</span>
-								<span>Gyeongido</span>
-								<span>Busan</span>
-								<span>Jejudo</span>
+								<span>Gangbuk_ku_168</span>
+								<span>Chungchangte_24</span>
+								<span>Banghakro_23</span>
+								<span>Dongilro_1345</span>
 							</div>
 						</Box>
 					</Stack>

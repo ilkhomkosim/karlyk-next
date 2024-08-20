@@ -16,11 +16,10 @@ export interface Property {
 	propertyType: PropertyType;
 	propertyStatus: PropertyStatus;
 	propertyLocation: PropertyLocation;
-	propertyAddress: string;
 	propertyTitle: string;
 	propertyPrice: number;
-	propertySquare: number;
-	propertyBeds: number;
+	propertyLeftCount: number;
+	propertyVolumes: number;
 	propertySizes: number;
 	propertyViews: number;
 	propertyLikes: number;
@@ -28,8 +27,6 @@ export interface Property {
 	propertyRank: number;
 	propertyImages: string[];
 	propertyDesc?: string;
-	propertyBarter: boolean;
-	propertyRent: boolean;
 	memberId: string;
 	soldAt?: Date;
 	deletedAt?: Date;

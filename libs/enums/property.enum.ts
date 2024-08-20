@@ -14,8 +14,8 @@ export enum PropertyStatus {
 
 export enum PropertyLocation {
 	Miadong987_456 = 'Miadong987_456',
-	Gangbuk_ku_168 = 'Gangbuk-ku_168',
-	Chungchangte_ro_244 = 'Chungchangte_24',
+	Gangbuk_ku_168 = 'Gangbuk_ku_168',
+	Chungchangte_24 = 'Chungchangte_24',
 	Tongnamgo_168 = 'Tongnamgo_168',
 	Banghakro_23 = 'Banghakro_23',
 	Dongilro_1345 = 'Dongilro_1345',

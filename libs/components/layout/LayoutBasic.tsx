@@ -55,7 +55,7 @@ const withLayoutBasic = (Component: any) => {
 					break;
 				case '/community/detail':
 					title = 'Article Detail';
-					desc = 'Write freely and get more information!';
+					desc = 'Write, read, recommend!';
 					bgImage = '/img/banner/community.jpg';
 					break;
 				case '/cs':
@@ -66,7 +66,7 @@ const withLayoutBasic = (Component: any) => {
 				case '/account/join':
 					title = 'Login/Signup';
 					desc = 'Authentication Process';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/join.jpg';
 					setAuthHeader(true);
 					break;
 				case '/member':

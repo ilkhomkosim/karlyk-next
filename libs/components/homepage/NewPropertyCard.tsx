@@ -44,8 +44,8 @@ const NewPropertyCard = (props: NewPropertyCardProps) => {
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
-							{/* <img src="/img/icons/bed.svg" alt="" /> */}
-							<span>{property.propertyBeds} pc</span>
+							{/* <img src="/img/icons/volume.svg" alt="" /> */}
+							<span>{property.propertyVolumes} pc</span>
 						</div>
 						<div>
 							{/* <img src="/img/icons/size.svg" alt="" /> */}
@@ -53,7 +53,7 @@ const NewPropertyCard = (props: NewPropertyCardProps) => {
 						</div>
 						<div>
 							{/* <img src="/img/icons/expand.svg" alt="" /> */}
-							<span>{property.propertySquare} pcs left</span>
+							<span>{property.propertyLeftCount} pcs left</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
@@ -102,8 +102,8 @@ const NewPropertyCard = (props: NewPropertyCardProps) => {
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
-							{/* <img src="/img/icons/bed.svg" alt="" /> */}
-							<span>{property.propertyBeds} pc</span>
+							{/* <img src="/img/icons/volume.svg" alt="" /> */}
+							<span>{property.propertyVolumes} pc</span>
 						</div>
 						<div>
 							{/* <img src="/img/icons/size.svg" alt="" /> */}
@@ -111,7 +111,7 @@ const NewPropertyCard = (props: NewPropertyCardProps) => {
 						</div>
 						<div>
 							{/* <img src="/img/icons/expand.svg" alt="" /> */}
-							<span>{property.propertySquare} pcs left</span>
+							<span>{property.propertyLeftCount} pcs left</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
