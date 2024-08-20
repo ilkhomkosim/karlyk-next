@@ -8,13 +8,13 @@ export default function Document() {
 				<link rel="icon" type="image/png" href="/img/logo/footer.logo.png" />
 
 				{/* SEO */}
-				<meta name="keyword" content={'karlyk, karlyk.uz, devex mern, mern nestjs fullstack'} />
+				<meta name="keyword" content={'karlyk, karlyk.uz, cosmetics, makeup, perfume '} />
 				<meta
 					name={'description'}
 					content={
-						'Buy and sell properties anywhere anytime in South Korea. Best Products at Best prices on karlyk.uz | ' +
-						'Покупайте и продавайте недвижимость в любой точке Южной Кореи в любое время. Лучшая недвижимость по лучшим ценам на karlyk.uz | ' +
-						'대한민국 언제 어디서나 부동산을 사고팔 수 있습니다. Karlyk.uz에서 최적의 가격으로 최고의 부동산을 만나보세요'
+						'Buy cosmetics products in South Korea. Best Products at Best prices on karlyk.uz | ' +
+						'Купить косметическую продукцию в Южной Корее. Лучшие товары по лучшим ценам на karlyk.uz | ' +
+						'한국에서 화장품을 구매하세요. karlyk.uz에서 최고의 가격으로 최고의 제품을 만나보세요'
 					}
 				/>
 			</Head>

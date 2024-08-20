@@ -38,11 +38,9 @@ const withLayoutMain = (Component: any) => {
 						<Stack id={'top'}>
 							<Top />
 						</Stack>
-
 						<Stack id={'main'}>
 							<Component {...props} />
 						</Stack>
-
 						<Stack id={'footer'}>
 							<Footer />
 						</Stack>
