@@ -21,9 +21,9 @@ const ChooseUs = ( ) => {
                     </Stack>
                     <Stack className={'main-adv'}>
                     <Stack className={'advice'}>
-                        <Stack className={'advice-txt'}><Box className={'check'}><CheckCircleOutlineIcon/></Box><Box className={'txt'}>Natural Products</Box></Stack>
-                        <Stack className={'advice-txt'}><Box className={'check'}><CheckCircleOutlineIcon/></Box><Box className={'txt'}>Best Prices</Box></Stack>
-                        <Stack className={'advice-txt'}><Box className={'check'}><CheckCircleOutlineIcon/></Box><Box className={'txt'}>Large assortment</Box></Stack>
+                        <Stack className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><Box className={'txt'}>Natural Products</Box></Stack>
+                        <Stack className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><Box className={'txt'}>Best Prices</Box></Stack>
+                        <Stack className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><Box className={'txt'}>Large assortment</Box></Stack>
                     </Stack>
                     <Stack className={'content'}>
                         
