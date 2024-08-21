@@ -12,9 +12,9 @@ const ChooseUs = ( ) => {
                 </Stack>
 					<Stack className={'choose-info'}>
                     <Stack>
-                    <Box /*component={'div'}*/ className={'right'}>
+                    <Box component={'div'} className={'right'}>
                     </Box>
-						<Box /*component={'div'}*/ className={'left'}>
+						<Box component={'div'} className={'left'}>
 							<span>Why Choose Us</span>
 							<p>“We are Karlyk always want the best for you dear ones and offer it to you. The most important thing for us is your beauty and your trust in us”</p>
 						</Box>
