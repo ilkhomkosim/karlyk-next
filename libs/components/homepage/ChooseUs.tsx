@@ -8,9 +8,9 @@ const ChooseUs = ( ) => {
 		return (
 			<Stack className={'choose-us'}>
 				<Stack className={'container'}>
-                <Stack className={'choose-img'}>
-                </Stack>
-					<Stack className={'choose-info'}>
+                <div className={'choose-img'}>
+                </div>
+					<div className={'choose-info'}>
                     <Stack>
                     <Box component={'div'} className={'right'}>
                     </Box>
@@ -20,16 +20,16 @@ const ChooseUs = ( ) => {
 						</Box>
                     </Stack>
                     <Stack className={'main-adv'}>
-                    <Stack className={'advice'}>
-                        <Stack className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><Box className={'txt'}>Natural Products</Box></Stack>
-                        <Stack className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><Box className={'txt'}>Best Prices</Box></Stack>
-                        <Stack className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><Box className={'txt'}>Large assortment</Box></Stack>
-                    </Stack>
+                    <div className={'advice'}>
+                        <div className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><div className={'txt'}>Natural Products</div></div>
+                        <div className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><div className={'txt'}>Best Prices</div></div>
+                        <div className={'advice-txt'}><CheckCircleOutlineIcon sx={{ marginLeft: '17px', marginRight: '17px' }}/><div className={'txt'}>Large assortment</div></div>
+                    </div>
                     <Stack className={'content'}>
                         
                     </Stack>
                     </Stack>
-					</Stack>
+					</div>
 					</Stack>
 				</Stack>
 		);
